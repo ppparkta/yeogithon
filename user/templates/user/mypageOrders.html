@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>orders</title>
+</head>
+<body>
+    <h1>마이페이지 - 주문목록</h1>
+    <div>
+        {% for order in orders %}
+        <h2>{{ order.title }}</h2>
+        <h3>{{order.swuni.userName}}</h3>
+        <div>{{order.body}}</div>
+        <hr>
+        {% endfor %}
+    </div>
+</body>
+</html>

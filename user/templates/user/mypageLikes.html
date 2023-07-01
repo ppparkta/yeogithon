@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>likes</title>
+</head>
+<body>
+    <h1>마이페이지 - 찜목록</h1>
+    <div>
+        {% for like in likes %}
+        <h2>{{ like.title }}</h2>
+        <h3>{{like.swuniName.userName}}</h3>
+        <div>{{like.body}}</div>
+        <hr>
+        {% endfor %}
+    </div>
+</body>
+</html>

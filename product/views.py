@@ -4,7 +4,7 @@ from django.urls import reverse
 from .forms import ProductForm
 from .models import Product
 def product_list(request):
-    products = Product.objects.all().order_by('pk')
+    products = Product.objects.all().order_by('-pk')
     return render(request, 'product/product_list.html', {'products': products})
 
 def create_product(request):

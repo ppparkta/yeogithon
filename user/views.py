@@ -61,17 +61,17 @@ class KakaoCallback(View):
 # 마이페이지-찜 게시글 목록
 def MyPageLikeList(request, pk):
     if not request.user.is_authenticated:
-        return render(request, 'user/404.html', status=401)
+        return render(request, 'user/401.html', status=401)
     if not request.user.pk == pk:
-        return render(request, 'user/404.html', status=403)
+        return render(request, 'user/403.html', status=403)
     list = post.models.Post.objects.filter(like=pk)
     return render(request, 'user/mypageLikes.html', { "likes": list })
 
 # 마이페이지-주문 목록
 def MyPageOrderList(request, pk):
     if not request.user.is_authenticated:
-        return render(request, 'user/404.html', status=401)
+        return render(request, 'user/401.html', status=401)
     if not request.user.pk == pk:
-        return render(request, 'user/404.html', status=403)
+        return render(request, 'user/403.html', status=403)
     list = order.models.Order.objects.filter(swuni=pk)
     return render(request, 'user/mypageOrders.html', { "orders": list })

@@ -39,14 +39,12 @@ class KakaoCallback(View):
         access_token = requests.post(kakao_token_api, data=data).json().get("access_token")
         if access_token==None:
             return JsonResponse({'message': 'INVALID_TOKEN'}, status=401)
-        # 카카오 사용자 정보 요청
+        #카카오 사용자 정보 요청
         kakao_user_api="https://kapi.kakao.com/v2/user/me"
         user_info=requests.get(kakao_user_api, headers={"Authorization":f"Bearer ${access_token}"}).json()
-        print(user_info)
-
-        # 회원가입
+        # print(user_info)
         if not Swuni.objects.filter(kakaoId=user_info['id']).exists():
-            swuni = Swuni.objects.create(
+            swuni=Swuni.objects.create(
                 kakaoId=user_info['id'],
                 userName=user_info['properties']['nickname'],
                 userImage=user_info['properties']['thumbnail_image'],

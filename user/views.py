@@ -55,22 +55,23 @@ class KakaoCallback(View):
             )
         # 로그인
         swuni = Swuni.objects.get(kakaoId=user_info['id'])
-        login(request, swuni)
-        request.session['user'] = swuni.pk
-        print(request.session.get('user'))
-        print(request.user.pk)
+        login(request, swuni, 'user.auth.MyBackend')
         return redirect('http://127.0.0.1:8000/users/')
 
 # 마이페이지-찜 게시글 목록
 def MyPageLikeList(request, pk):
-    if not request.session.get('user') == pk:
-        return render(request, 'user/404.html', status=401)
+    if not request.user.is_authenticated:
+        return render(request, 'user/401.html', status=401)
+    if not request.user.pk == pk:
+        return render(request, 'user/403.html', status=403)
     list = post.models.Post.objects.filter(like=pk)
     return render(request, 'user/mypageLikes.html', { "likes": list })
 
 # 마이페이지-주문 목록
 def MyPageOrderList(request, pk):
-    if not request.session.get('user') == pk:
-        return render(request, 'user/404.html', status=401)
+    if not request.user.is_authenticated:
+        return render(request, 'user/401.html', status=401)
+    if not request.user.pk == pk:
+        return render(request, 'user/403.html', status=403)
     list = order.models.Order.objects.filter(swuni=pk)
     return render(request, 'user/mypageOrders.html', { "orders": list })

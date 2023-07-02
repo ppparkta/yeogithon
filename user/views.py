@@ -36,7 +36,7 @@ class KakaoCallback(View):
         #카카오 사용자 정보 요청
         kakao_user_api="https://kapi.kakao.com/v2/user/me"
         user_info=requests.get(kakao_user_api, headers={"Authorization":f"Bearer ${access_token}"}).json()
-        # print(user_info)
+        print(user_info)
         if not Swuni.objects.filter(kakaoId=user_info['id']).exists():
             swuni=Swuni.objects.create(
                 kakaoId=user_info['id'],

@@ -1,3 +1,5 @@
+from django.contrib.auth import login, authenticate
+from django.contrib.auth import authenticate
 from django.utils import timezone
 from django.http import JsonResponse
 from django.shortcuts import render,redirect
@@ -36,7 +38,8 @@ class KakaoCallback(View):
         #카카오 사용자 정보 요청
         kakao_user_api="https://kapi.kakao.com/v2/user/me"
         user_info=requests.get(kakao_user_api, headers={"Authorization":f"Bearer ${access_token}"}).json()
-        # print(user_info)
+        print(user_info)
+
         if not Swuni.objects.filter(kakaoId=user_info['id']).exists():
             swuni=Swuni.objects.create(
                 kakaoId=user_info['id'],
@@ -45,6 +48,9 @@ class KakaoCallback(View):
                 last_login=timezone.now(),
                 password="1234",
             )
+        swuni = Swuni.objects.get(kakaoId=user_info['id'])
+        print(swuni)
+        login(request, swuni)
         return redirect('http://127.0.0.1:8000/users/login')
 
 # 마이페이지-찜 게시글 목록

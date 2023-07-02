@@ -43,7 +43,7 @@ class Swuni(AbstractBaseUser, PermissionsMixin):
     objects = SwuniManager()
 
     USERNAME_FIELD = 'kakaoId'
-    REQUIRED_FIELDS = ['userName', 'userImage', 'is_staff']
+    REQUIRED_FIELDS = ['userName', 'userImage']
 
     def __str__(self):
         return self.userName

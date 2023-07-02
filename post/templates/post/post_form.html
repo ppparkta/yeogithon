@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Post 입력 화면</h1>
+    <form action="" method="POST">{% csrf_token %}
+        <div>
+            <label for="id_title">제목</label>
+            <textarea name="title" id="id_title" cols="5" rows="5">
+                {{ post.title }}
+            </textarea>
+            <label for="id_body">내용</label>
+            <textarea name="body" id="id_body" cols="30" rows="10">{% if post %}{{ post.body }}{% endif %}
+            </textarea>
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+</body>
+</html>

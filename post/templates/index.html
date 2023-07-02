@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Index Page</title>
+</head>
+<body>
+    <h1>인덱스 화면</h1>
+    <ul>
+        <li><a href="{% url 'post:post-list' %}">게시글 목록</a></li> <!--post/urls.py에 name으로 지정해줌 -->
+        <li><a href="{% url 'post:post-create' %}">게시글 생성</a></li>
+
+    </ul>
+</body>
+</html>

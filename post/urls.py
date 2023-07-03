@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import post_list_view, post_create_view, post_update_view, post_detail_view, post_delete_view
+from .views import post_list_view, post_create_view, post_update_view, post_detail_view, post_delete_view,post_like
 
 app_name = "post"
 
@@ -25,4 +25,5 @@ urlpatterns = [
     path('<int:id>/edit/', post_update_view, name='post-update'),
     path('<int:id>/', post_detail_view, name='post-detail'),
     path('<int:id>/delete/', post_delete_view, name='post-delete'),
+    path('<int:id>/like/', post_like, name='post-like'),
 ]

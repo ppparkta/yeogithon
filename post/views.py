@@ -68,3 +68,24 @@ def post_delete_view(request, id): # 글 삭제
         # 삭제하면 삭제 후 index 페이지로
         post.delete()
         return redirect('index')
+    # if request.method == 'POST':
+    #     # 삭제하면 삭제 후 index 페이지로
+    #     post.delete()
+    #     return redirect('index')
+
+def post_like(request, id): #찜
+    post = get_object_or_404(Post, id=id)
+    if request.method == 'POST':
+        if post.like.filter(id=request.user.id).exists(): # 찜 이미 누른 상태일 때
+            post.like.remove(request.user) # 찜 취소
+            post.save()
+        else: # 찜  누르지 않은 상태일 때
+            post.like.add(request.user) # 찜 등록
+            post.save()
+        return redirect('post:post-list')
+    else:
+        post = get_object_or_404(Post, id=id)
+        context = {
+            'post': post
+        }
+        return render(request, 'post/post_detail.html', context)

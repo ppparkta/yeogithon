@@ -88,8 +88,6 @@ from .models import Cart
 #
 #     return render(request, 'cart/create_cart.html', {'cart_form': cart_form})
 # 카트 상품 리스트
-cart_product_list = []
-
 
 # def create_cartProduct(request):
 #     if request.method == 'POST':
@@ -157,6 +155,7 @@ cart_product_list = []
 #
 
 #메뉴판에서 상품을 선택했을 때 그 상품이 카트 상품으로 인식
+
 def create_cartProduct(request):
     if request.method == 'POST':
         cartProduct_Form = CartProductForm(request.POST)
@@ -173,6 +172,13 @@ def create_cartProduct(request):
     return render(request, 'product/product_list.html',
                   {'cartProduct_Form': cartProduct_Form, 'cart_Form': cart_Form})
 
+def create_cartProduct(request, pk):
+    if request.method=='POST':
+        cart = Cart.objects.get(request.user.pk==swuni.pk)
+        cartProductForm = CartProductForm(request.POST)
+        if cartProductForm.is_valid():
+            cartProduct=cartProductForm.save(commit=False)
+            cartProduct.cart = cart
 
 #카트 생성 + 위에서 만든 카트 상품 리스트를 카트에 넣음
 #카트 상품 리스트에 담긴 상품들의 총가격 계산한 후 카트 저장

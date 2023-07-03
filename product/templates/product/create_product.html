@@ -16,7 +16,33 @@
           <div class="card">
             <div class="card-body">
               <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %} {{ form.as_p }}
+                {% csrf_token %}
+                <div>
+                  <h5>상품명</h5>
+                  <input type="text" name="productName" value="{{ product.productName }}">
+                </div>
+                <div>
+                  <h5>상품 가격</h5>
+                  <input type="number" name="productPrice" value="{{ product.productPrice }}">
+                </div>
+                <div>
+                  <h5>상품 이미지</h5>
+                  <input type="file" name="productImage" value="{{ product.productImage }}">
+                </div>
+                <div>
+                  <label>
+                      <input type="radio" name="productTemp" value="ICE" checked>
+                      ICE
+                    </label>
+
+                    <label>
+                      <input type="radio" name="productTemp" value="HOT">
+                      HOT
+                  </label>
+                </div>
+
+<!--                <form method="POST" enctype="multipart/form-data">-->
+<!--                    {% csrf_token %} {{ form.as_p }}-->
                 <button type="submit" class="btn btn-primary">등록</button>
               </form>
             </div>
@@ -24,6 +50,6 @@
         </div>
       </div>
     </div>
-  </body>
   </div>
+  </body>
 </html>

@@ -6,6 +6,7 @@ from django.views.generic import View, CreateView, UpdateView, DeleteView
 
 import order.models
 import post.models
+from cart.models import Cart
 from .models import Swuni
 import requests
 
@@ -50,6 +51,10 @@ class KakaoCallback(View):
                 userImage=user_info['properties']['thumbnail_image'],
                 last_login=timezone.now(),
                 password="1234",
+            )
+            cart=Cart.objects.create(
+                cartTotalPrice=0,
+                swuni=swuni,
             )
         # 로그인
         swuni = Swuni.objects.get(kakaoId=user_info['id'])

@@ -28,11 +28,11 @@
                         {% else %}
                             <h5>HOT</h5>
                         {% endif %}
-                        <form method="POST" action="{% url 'product:edit_product' pk=product.pk %}">
+                        <form method="GET" action="{% url 'product:edit_product' pk=product.pk %}">
                             {% csrf_token %}
                         <button type="submit" class="btn btn-outline-dark">수정</button>
                         </form>
-                        <form method="POST" action="{% url 'product:delete_product' pk=product.pk %}">
+                        <form method="GET" action="{% url 'product:delete_product' pk=product.pk %}">
                             {% csrf_token %}
                         <button type="submit" class="btn btn-outline-dark">삭제</button>
                         </form>

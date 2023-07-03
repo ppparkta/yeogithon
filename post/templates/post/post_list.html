@@ -14,6 +14,14 @@
             {{ post.body }}<br/>
             {{ post.swuniName }}<br/>
         </div>
+        <form action="{% url 'post:post-like' post.id %}" method='POST'>
+            {% csrf_token %}
+            {% if request.user in post.like.all %}
+                <input type="submit" value='찜 취소하기'>
+            {% else %}
+                <input type="submit" value='찜하기'>
+            {% endif %}
+        </form>
     {% endfor %}
 
 </body>

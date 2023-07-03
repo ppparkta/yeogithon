@@ -2,18 +2,20 @@ from django.shortcuts import render, get_object_or_404
 from .forms import OrderForm
 from .models import Order
 from cart.models import Cart
+from orderProduct.models import OrderProduct
 # Create your views here.
 
-#카트를 주문객체로 가져옴
-def create_Order(request):
-    if request.method == 'POST':
-        # 카트 정보 가져오기
-        cart = get_object_or_404(Cart, pk=cart_id)
 
-        # 주문 객체 생성
-        order = Order.objects.create(cart=cart, order_status='주문 처리 중', OrderProduct=cart.cart_product_list)
+def view_User_Order(request): #사용자 주문 내역 조회
+    if request.method == 'GET':
+        order = Order.objects.filter(request.user.pk == order.cart.swuni.pk)
+        orderProduct.cart_product = cart.products.all()
+        order_product_list = orderProduct.cart_product
 
-        return render(request, 'product/product_list.html', {'message': '주문이 성공적으로 생성되었습니다.'})
-    else:
-        # GET 요청 처리 로직 작성
-        return render(request, 'cart/cart_list.html')
+        return render(request,'order/order_user_list',{'order':order, 'order_product_list': order_product_list})
+
+def view_All_Order(request): #관리자 시점 주문 내역 조회
+    if request.method == 'GET':
+        order = Order.objects.all()
+
+    # elif request.method == 'POST':

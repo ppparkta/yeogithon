@@ -1,66 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-
-from .forms import ProductForm
 from .models import Product
 
 
+# 상품 전체 조회 (권한 제한 X)
 def product_list(request):
     products = Product.objects.all().order_by('-pk')
     return render(request, 'product/product_list.html', context={'products': products})
 
 
-# def create_product(request):
-#     if request.method == "POST":
-#         form = ProductForm(request.POST, request.FILES)
-#
-#         if form.is_valid():
-#             product = form.save(commit=False)
-#             product.save()
-#             return redirect(reverse('product:product_list'))
-#
-#     else:
-#         form = ProductForm()
-#
-#     return render(request, 'product/create_product.html', context={'form': form})
-#
-# # 상품 수정 (권한 필요)
-# def edit_product(request, pk):
-#     swuni = request.user  # 현재 로그인한 사용자 정보 가져오기
-#
-#     if not swuni.is_authenticated:  # 권한이 없다면
-#         return render(request, 'product/401.html', status=401)  # 401 이동
-#
-#     product = Product.objects.get(id=pk)
-#
-#     if request.method == "POST":
-#         form = ProductForm(request.POST, instance=product)
-#
-#         if form.is_valid():
-#             product = form.save(commit=False)
-#             product.save()
-#             return redirect(reverse('product:product_list'))
-#
-#     else:
-#         form = ProductForm()
-#
-#     return render(request, 'product/create_product.html', context={'form': form})
-#
-# # 상품 삭제 (권한 필요)
-# def delete_product(request, pk):
-#     swuni = request.user  # 현재 로그인한 사용자 정보 가져오기
-#
-#     if not swuni.is_authenticated:  # 권한이 없다면
-#         return render(request, 'product/401.html', status=401)  # 401 이동
-#
-#     if request.method == "POST":
-#         product = Product.objects.get(id=pk)
-#         product.delete()
-#         return redirect(reverse('product:product_list'))
-#
-#     return render(request, 'product/failDelete.html')
-
-# ---------------- form 미사용 ------------------- #
 # 상품 생성 (권한 필요)
 def create_product(request):
     swuni = request.user  # 현재 로그인한 사용자 정보 가져오기
@@ -126,7 +74,7 @@ def delete_product(request, pk):
     if not swuni.is_authenticated:  # 권한이 없다면
         return render(request, 'product/401.html', status=401)  # 401 이동
 
-    if request.method == "POST":
+    if request.method == "GET":
         product = Product.objects.get(id=pk)
         product.delete()
         return redirect(reverse('product:product_list'))

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CartProductForm,CartForm
+from .forms import CartProductForm, CartForm
 from cartProduct.models import CartProduct
 from .models import Cart
 
@@ -91,6 +91,70 @@ from .models import Cart
 cart_product_list = []
 
 
+# def create_cartProduct(request):
+#     if request.method == 'POST':
+#         cartProduct_Form = CartProductForm(request.POST)
+#         cart_Form = CartForm(request.POST)
+#         if cartProduct_Form.is_valid() and cart_Form.is_valid():
+#             cart_Product = cartProduct_Form.save(commit=False)
+#
+#             # 카트 상품 리스트에 추가
+#             cart_product_list.append(cart_Product)
+#
+#             return render(request, 'product/product_list.html')  # 메뉴판 페이지를 다시 렌더링
+#     else:
+#         cartProduct_Form = CartProductForm()  # 빈 카트 상품 폼 인스턴스 생성
+#         cart_Form = CartForm()  # 빈 카트 폼 인스턴스 생성
+#
+#     return render(request, 'product/product_list.html',
+#                   {'cartProduct_Form': cartProduct_Form, 'cart_Form': cart_Form})
+#
+#
+# def addProduct_cart(request): #카트에 카트 상품 넣기
+#     if request.method == 'POST':
+#         cart = Cart.objects.create()  # 카트 객체 생성
+#
+#         for cart_product in cart_product_list:
+#             cart_product.cart = cart
+#             cart_product.save()
+#
+#         total_price = 0
+#         for cart_product in cart_product_list:
+#             total_price += cart_product.cartProductCount * cart_product.cartProduct.price
+#
+#         cart.cartTotalPrice = total_price
+#         cart.save()
+#
+#         return render(request, 'cart/cart_list.html')  # 장바구니 화면
+#     else:
+#         return render(request, 'cart/cart_list.html') #장바구니 화면으로 이동
+#
+#
+# def add_request(request, cart_id): #장바구니 요청 사항 넣기
+#     cart = get_object_or_404(Cart, pk=cart_id)
+#     if request.method == 'POST':
+#         cart_form = CartForm(request.POST)
+#         if cart_form.is_valid():
+#             cart_request = cart_form.cleaned_data['cartRequest']
+#             cart.cartRequest = cart_request
+#             cart.save()
+#             return render(request, 'cart/cart_list.html')  # 장바구니 상세 페이지로 리디렉션
+#     else:
+#         cart_form = CartForm()
+#
+#     return render(request, 'cart/cart_list.html', {'cart': cart, 'cart_form': cart_form})
+#
+#
+# def cart_detail(request):
+#     # 장바구니 조회
+#     cart = get_object_or_404(Cart, pk=cart_id)
+#
+#     # 장바구니 상품 리스트 조회
+#     cart_product_list = cart.products.all()
+#
+#     return render(request, 'cart/cart_list.html', {'cart': cart, 'cart_product_list': cart_product_list})
+#     #총 가격과 요청사항은 템플릿에 cart.cartRequest, cart.cartTotalPrice
+#
 def create_cartProduct(request):
     if request.method == 'POST':
         cartProduct_Form = CartProductForm(request.POST)
@@ -98,10 +162,14 @@ def create_cartProduct(request):
         if cartProduct_Form.is_valid() and cart_Form.is_valid():
             cart_Product = cartProduct_Form.save(commit=False)
 
-            # 카트 상품 리스트에 추가
-            cart_product_list.append(cart_Product)
+            # 현재 사용자의 카트 가져오기 또는 생성하기
+            cart = get_or_create_cart(request)
 
-            return render(request, 'product/product_list.html')  # 메뉴판 페이지를 다시 렌더링
+            # 카트 상품 추가
+            cart_Product.cart = cart
+            cart_Product.save()
+
+            return redirect('product:product_list')  # 상품 리스트 페이지로 리디렉션
     else:
         cartProduct_Form = CartProductForm()  # 빈 카트 상품 폼 인스턴스 생성
         cart_Form = CartForm()  # 빈 카트 폼 인스턴스 생성
@@ -110,13 +178,12 @@ def create_cartProduct(request):
                   {'cartProduct_Form': cartProduct_Form, 'cart_Form': cart_Form})
 
 
-def addProduct_cart(request): #카트에 카트 상품 넣기
+def addProduct_cart(request):
     if request.method == 'POST':
-        cart = Cart.objects.create()  # 카트 객체 생성
+        # 현재 사용자의 카트 가져오기 또는 생성하기
+        cart = get_or_create_cart(request)
 
-        for cart_product in cart_product_list:
-            cart_product.cart = cart
-            cart_product.save()
+        cart_product_list = cart.products.all()
 
         total_price = 0
         for cart_product in cart_product_list:
@@ -127,10 +194,10 @@ def addProduct_cart(request): #카트에 카트 상품 넣기
 
         return render(request, 'cart/cart_list.html')  # 장바구니 화면
     else:
-        return render(request, 'cart/cart_list.html') #장바구니 화면으로 이동
+        return render(request, 'cart/cart_list.html')  # 장바구니 화면으로 이동
 
 
-def add_request(request, cart_id): #장바구니 요청 사항 넣기
+def add_request(request, cart_id):
     cart = get_object_or_404(Cart, pk=cart_id)
     if request.method == 'POST':
         cart_form = CartForm(request.POST)
@@ -145,13 +212,25 @@ def add_request(request, cart_id): #장바구니 요청 사항 넣기
     return render(request, 'cart/cart_list.html', {'cart': cart, 'cart_form': cart_form})
 
 
-def cart_detail(request):
-    # 장바구니 조회
+def cart_detail(request, cart_id):
     cart = get_object_or_404(Cart, pk=cart_id)
 
-    # 장바구니 상품 리스트 조회
     cart_product_list = cart.products.all()
 
     return render(request, 'cart/cart_list.html', {'cart': cart, 'cart_product_list': cart_product_list})
-    #총 가격과 요청사항은 템플릿에 cart.cartRequest, cart.cartTotalPrice
 
+
+def get_or_create_cart(request):
+    # 세션에서 카트 아이디 가져오기
+    cart_id = request.session.get('cart_id')
+
+    if cart_id:
+        # 기존 카트가 있는 경우 해당 카트 반환
+        cart = get_object_or_404(Cart, pk=cart_id)
+    else:
+        # 기존 카트가 없는 경우 새로운 카트 생성
+        cart = Cart.objects.create()
+        # 세션에 카트 아이디 저장
+        request.session['cart_id'] = cart.id
+
+    return cart

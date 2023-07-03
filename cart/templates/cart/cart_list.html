@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>장바구니</title>
 </head>
 <body>
-
+    <h1>장바구니</h1>
+    <ul>
+        {% for cart_product in cart_product_list %}
+            <li>{{ cart_product.cartProduct.name }} - 가격: {{ cart_product.cartProduct.price }} (수량: {{ cart_product.cartProductCount }})</li>
+        {% endfor %}
+    </ul>
+    <h2>장바구니 총 가격: {{ cart.cartTotalPrice }}</h2>
+    <h2>장바구니 요청사항: {{ cart.cartRequest }}</h2>
+    <h2>요청사항 추가하기</h2>
+    <form method="post" action="{% url 'cart:add_request' cart.id %}">
+        {% csrf_token %}
+        <!-- 요청사항 폼 필드를 추가하세요 -->
+        <button type="submit">요청사항 추가</button>
+    </form>
+    <h2>결제하기</h2>
+    <form method="post" action="{% url 'cart:checkout' cart.id %}">
+        {% csrf_token %}
+        <button type="submit">결제</button>
+    </form>
 </body>
 </html>
+

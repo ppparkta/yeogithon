@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .forms import OrderForm
 from .models import Order
 from cart.models import Cart
 # Create your views here.
 
+#카트를 주문객체로 가져옴
 def create_Order(request):
     if request.method == 'POST':
         # 카트 정보 가져오기
@@ -16,4 +17,3 @@ def create_Order(request):
     else:
         # GET 요청 처리 로직 작성
         return render(request, 'cart/cart_list.html')
-

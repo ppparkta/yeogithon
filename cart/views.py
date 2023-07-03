@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CartProductForm, CartForm
 from cartProduct.models import CartProduct
 from .models import Cart
@@ -88,7 +88,6 @@ from .models import Cart
 #
 #     return render(request, 'cart/create_cart.html', {'cart_form': cart_form})
 # 카트 상품 리스트
-cart_product_list = []
 
 
 # def create_cartProduct(request):
@@ -186,6 +185,7 @@ def addProduct_cart(request):
             cart_product.save()
 
         # cart.products = cart_product_list
+        #요청사항 작성
 
         total_price = 0
         for cart_product in cart_product_list:

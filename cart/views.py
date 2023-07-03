@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .forms import CartProductForm, CartForm
 from cartProduct.models import CartProduct
 from .models import Cart
@@ -88,7 +88,6 @@ from .models import Cart
 #
 #     return render(request, 'cart/create_cart.html', {'cart_form': cart_form})
 # 카트 상품 리스트
-
 
 # def create_cartProduct(request):
 #     if request.method == 'POST':

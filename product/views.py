@@ -72,13 +72,13 @@ def create_product(request):
         productName = request.POST.get('productName')
         productPrice = request.POST.get('productPrice')
         productImage = request.FILES.get('productImage')
-        # productTemp = request.POST.get('productTemp')
+        productTemp = request.POST.get('productTemp')
 
         Product.objects.create(
             productName=productName,
             productPrice=productPrice,
             productImage=productImage,
-            # productTemp=productTemp
+            productTemp=productTemp
         )
         return redirect(reverse('product:product_list'))
 
@@ -99,13 +99,18 @@ def edit_product(request, pk):
         productName = request.POST.get('productName')
         productPrice = request.POST.get('productPrice')
         productImage = request.FILES.get('productImage')
-        #productTemp = request.POST.get('productTemp')
+        productTemp = request.POST.get('productTemp')
+
+
+        if productImage is None:
+            # 새로운 이미지가 제출되지 않은 경우 기존 이미지 유지
+            productImage = product.productImage
 
         # 데이터 변경
         product.productName = productName
         product.productPrice = productPrice
         product.productImage = productImage
-        #product.productTemp = productTemp
+        product.productTemp = productTemp
 
         product.save()
 

@@ -23,9 +23,11 @@
                     <div class="card-body">
                         <h3 class="card-title h4">{{ product.productName }}</h3>
                         <h5 class="card-title h4">{{ product.productPrice }}</h5>
-                        {% if product.productTemp %}
+                        {% if product.productTemp == "ICE" %}
                             <h5>ICE</h5>
-                        {% else %}
+                        {% endif %}
+
+                        {% if product.productTemp == "HOT" %}
                             <h5>HOT</h5>
                         {% endif %}
                         <form method="GET" action="{% url 'product:edit_product' pk=product.pk %}">

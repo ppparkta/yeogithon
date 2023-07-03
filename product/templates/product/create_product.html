@@ -27,10 +27,18 @@
                 </div>
                 <div>
                   <h5>상품 이미지</h5>
-                  <input type="image" name="productImage" value="{{ product.productImage }}">
+                  <input type="file" name="productImage" value="{{ product.productImage }}">
                 </div>
                 <div>
-                  <h5>ICE / HOT (checked = ICE)</h5>
+                  <label>
+                      <input type="radio" name="productTemp" value="ICE" checked>
+                      ICE
+                    </label>
+
+                    <label>
+                      <input type="radio" name="productTemp" value="HOT">
+                      HOT
+                  </label>
                 </div>
 
 <!--                <form method="POST" enctype="multipart/form-data">-->

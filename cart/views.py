@@ -155,35 +155,37 @@ cart_product_list = []
 #     return render(request, 'cart/cart_list.html', {'cart': cart, 'cart_product_list': cart_product_list})
 #     #총 가격과 요청사항은 템플릿에 cart.cartRequest, cart.cartTotalPrice
 #
+
+#메뉴판에서 상품을 선택했을 때 그 상품이 카트 상품으로 인식
 def create_cartProduct(request):
     if request.method == 'POST':
         cartProduct_Form = CartProductForm(request.POST)
-        cart_Form = CartForm(request.POST)
-        if cartProduct_Form.is_valid() and cart_Form.is_valid():
-            cart_Product = cartProduct_Form.save(commit=False)
+        if cartProduct_Form.is_valid():
+                cart_Product = cartProduct_Form.save(commit=False)
 
-            # 현재 사용자의 카트 가져오기 또는 생성하기
-            cart = get_or_create_cart(request)
+                # 카트 상품 리스트에 추가
+                cart_product_list.append(cart_Product)
 
-            # 카트 상품 추가
-            cart_Product.cart = cart
-            cart_Product.save()
-
-            return redirect('product:product_list')  # 상품 리스트 페이지로 리디렉션
+                return render(request, 'product/product_list.html')   # 상품 리스트 페이지로 리디렉션
     else:
         cartProduct_Form = CartProductForm()  # 빈 카트 상품 폼 인스턴스 생성
-        cart_Form = CartForm()  # 빈 카트 폼 인스턴스 생성
 
     return render(request, 'product/product_list.html',
                   {'cartProduct_Form': cartProduct_Form, 'cart_Form': cart_Form})
 
 
+#카트 생성 + 위에서 만든 카트 상품 리스트를 카트에 넣음
+#카트 상품 리스트에 담긴 상품들의 총가격 계산한 후 카트 저장
 def addProduct_cart(request):
     if request.method == 'POST':
         # 현재 사용자의 카트 가져오기 또는 생성하기
         cart = get_or_create_cart(request)
 
-        cart_product_list = cart.products.all()
+        for cart_product in cart_product_list:
+            cart_product.cart = cart
+            cart_product.save()
+
+        # cart.products = cart_product_list
 
         total_price = 0
         for cart_product in cart_product_list:
@@ -197,6 +199,7 @@ def addProduct_cart(request):
         return render(request, 'cart/cart_list.html')  # 장바구니 화면으로 이동
 
 
+#폼으로 입력 받아서 장바구니 요청사항 생성후 카트 저장
 def add_request(request, cart_id):
     cart = get_object_or_404(Cart, pk=cart_id)
     if request.method == 'POST':
@@ -212,6 +215,7 @@ def add_request(request, cart_id):
     return render(request, 'cart/cart_list.html', {'cart': cart, 'cart_form': cart_form})
 
 
+#장바구니 조회
 def cart_detail(request, cart_id):
     cart = get_object_or_404(Cart, pk=cart_id)
 

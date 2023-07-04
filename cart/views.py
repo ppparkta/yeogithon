@@ -20,15 +20,15 @@ def add_request(request):
             cart.save()
 
             order = Order.objects.create(cart=cart)
-            for orderProduct in cart.products:
+            for orderProduct in cart.products.all():
                 # orderProduct = OrderProduct.objects.create(order=order, cart_product=cart.products)
                 orderProduct.order=order
-                order_product.save()
+                orderProduct.save()
             order.save()
 
-            cart.cartRequest.clear()
-            cart.cartTotalPrice.clear()
-            return order, order_product
+            cart.cartRequest=''
+            cart.cartTotalPrice = 0
+            # return order, order_product
         return redirect('product:product_list')  #상품 목록페이지
 
     elif request.method == 'GET':

@@ -1,24 +1,37 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/write.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>SWU Beetle Juice Order System</title>
 </head>
 <body>
-    <h1>Post 입력 화면</h1>
-    <form action="" method="POST">{% csrf_token %}
-        <div>
-            <label for="id_title">제목</label>
-            <textarea name="title" id="id_title" cols="5" rows="5">
-                {{ post.title }}
-            </textarea>
-            <label for="id_body">내용</label>
-            <textarea name="body" id="id_body" cols="30" rows="10">{% if post %}{{ post.body }}{% endif %}
-            </textarea>
+    <div id="wrap">
+        <div id="header1"><br><br><h1>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSwuni's Recipe</h1><br></div>
+        <div id="section" style="overflow-x:hidden; height:790px; width:600px;">
+            <form action="" method="POST">{% csrf_token %}
+                <label for="title">제목:</label>
+                <textarea id= "title" name="title">{{ post.title }}</textarea><br><br>
+                <label for="content">내용:</label>
+                <textarea id= "content" name="body">{% if post %}{{ post.body }}{% endif %}</textarea><br><br>
+                <div id="footer1">
+                    <button type="submit" id="write" onclick="location.href='{% url 'post:post-list' %}'">저장하기</button>
+                </div>
+            </form>
         </div>
-        <div>
-            <input type="submit">
+            <div id="footer2">
+                <button type="button" id="menu" onclick="location.href='menu.html'">메뉴</button>
+                <button type="button" id="recipe" onclick="location.href='recipe.html'">레시피</button>
+                <button type="button" id="my" onclick="location.href='order2.html'">마이</button>
+            </div>
         </div>
-    </form>
+    </div>
 </body>
 </html>

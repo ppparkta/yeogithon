@@ -1,18 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>likes</title>
-</head>
-<body>
-    <h1>마이페이지 - 찜목록</h1>
-    <div>
-        {% for like in likes %}
-        <h2>{{ like.title }}</h2>
-        <h3>{{like.swuniName.userName}}</h3>
-        <div>{{like.body}}</div>
-        <hr>
-        {% endfor %}
-    </div>
-</body>
+<html>
+    <head>
+        
+        <link rel="stylesheet" href="{% static 'css/order2.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <title></title>
+    <body>
+        <div id="wrap">
+            <div id="header1">
+                <button type="button" id="headerA" onclick="location.href='order1.html'">주문내역</button>
+                <button type="button" id="headerB" onclick="location.href='order2.html'">찜한목록</button>
+            </div>
+            <div id="section" style="overflow-x:hidden; height:790px; width:600px;">
+                <div id="menumenu">
+                 {% for like in likes %}
+                <div id="menu">
+                    <br>
+                    <h2>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ like.title }}</h2>
+                    <h3>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp레시피 by {{like.swuniName.userName}}
+                </h3>
+                <br><h4 id="day">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{like.regTime}}
+                    <a id="ggim">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <i class="fa-solid fa-heart fa-lg"></i></a>
+                </h4>
+                </div>
+            </div>
+                {% endfor %}
+                <div id="lastfooter">
+                    <button type="button" id="lastfooter1" onclick="location.href='menu.html'">메뉴</button>
+                    <button type="button" id="lastfooter2" onclick="location.href='recipe.html'">레시피</button>
+                    <button type="button" id="lastfooter3"  onclick="location.href='order2.html'">마이</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="{% static 'js/order2.js' %}"></script>
 </html>

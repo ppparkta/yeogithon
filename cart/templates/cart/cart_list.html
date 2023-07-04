@@ -1,21 +1,53 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>장바구니</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/order.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <title>SWU Beetle Juice Order System</title>
 </head>
 <body>
-    <h1>장바구니</h1>
-    <h2>장바구니 총 가격: {{ cart.cartTotalPrice }}</h2>
-    <h2>장바구니 요청사항: {{ cart.cartRequest }}</h2>
-    <h2>요청사항</h2>
-    <form method="post" action="{% url 'cart:add_request' %}">
-        {% csrf_token %}
-        <!-- 요청사항 폼 필드를 추가하세요 -->
-        <div class="form-group">
-            <label for="id_cartRequest">요청사항:</label>
-            <input type="text" id="id_cartRequest" name="cartRequest" value="{{ cart.cartRequest }}">
+    <div id="wrap">
+        <div id="header1"><h1>Order</h1><br></div>
+        <div id="section" style="overflow-x:hidden;">
+            {% for cart_product in cart_product_list %}
+            <div id="order">
+                <div id="orderleft">
+                    <div id="orderimage">
+                        <img src="{{ cart_product.cartProduct.productImage.url }}" width="85px" height="85px" alt="{{ cart_product.cartProduct.productName }}" />
+                    </div>
+                    <div id="ordername">
+				        <h3 id="name">{{ cart_product.cartProduct.productName }}
+                            <a id="matter">&nbsp&nbsp{{ cart_product.cartProduct.productName }}</a>
+                        </h3>
+                        <h5 id="price">{{ cart_product.cartProduct.productPrice }}</h5>
+			        </div>
+                </div>
+				<div id="result">{{ cart_product.cartProductCount }}</div>
+
+            </div>
+            {% endfor %}
         </div>
-        <button type="submit">주문하기</button>
-    </form>
+        <div id="post">
+            <h3 id="r1">요청사항</h3>
+            <h4 id="r2">ex. 시럽 조금만 넣어주세요</h4>
+            <form method="post" action="{% url 'cart:add_request' %}">
+                {% csrf_token %}
+                <input type="text" id="input" name="cartRequest" value="{{ cart.cartRequest }}">
+            <button type="submit" id="request" >주문하기&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a id="total">{{ cart.cartTotalPrice }}</a></button>
+            </form>
+        </div>
+        <div id="footer2">
+            <a href="http://127.0.0.1:8000/" id="menu">메뉴</a>
+            <a href="http://127.0.0.1:8000/post/" id="recipe">레시피</a>
+            <a href="http://127.0.0.1:8000/users/{{ request.user.pk }}/likes/" id="my">마이</a>
+        </div>
+    </div>
 </body>
+<script src="{% static 'js/order.js'%}"></script>
 </html>

@@ -29,7 +29,6 @@ def add_request(request):
             cart.cartRequest.clear()
             cart.cartTotalPrice.clear()
             return order, order_product
-
         return redirect('product:product_list')  #상품 목록페이지
 
     elif request.method == 'GET':

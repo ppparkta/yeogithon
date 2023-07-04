@@ -1,0 +1,419 @@
+@font-face {
+    font-family: 'SEBANG_Gothic_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Tenada';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Tenada.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+*{margin:0;
+padding:0;}
+
+body{
+    background-color: rgb(215, 208, 184);
+}
+
+#wrap{
+    background-color: white;
+    width:600px;
+    margin:0 auto;
+    display: grid;
+    grid-template-areas:
+    "header1 header2"
+    "section section"
+    "footer footer"
+    "lastfooter lastfooter"
+    ;
+    grid-template-columns: 100px 500px;
+    grid-template-rows:  100px 800px 70px 40px;
+}
+/* 맨 위 배너 */
+/* #header1>h1{
+    color:#7375db;
+
+} */
+
+#header1>h1{color:#544866;
+    font-family: 'Lilita One';
+font-size:43px;}
+#header1{
+    grid-area: header1;
+    background-color:white;
+    height: 90px;
+    font-family: 'Lilita One';;
+
+}
+
+/* 본 메뉴판  */
+#header2{
+    grid-area: header2;
+    height: 40px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+#hotice{
+    text-align: right;
+    font-size: large;
+    color:#000000;
+    font:"SEBANG_Gothic_Bold";
+}
+
+#section{
+    height: 790px;
+    grid-area: section;
+    background-color: white;
+    display: grid;
+    grid-template-areas:
+    ". menu1 ."
+    ".menu2 ."
+    ". menu3 ."
+    ". menu4 ."
+    ". menu5 ."
+    ". menu6 ."
+    ". menu7 ."
+    ". menu8 ."
+    ". menu9 ."
+    ". menu10 ."
+    ". menu11 ."
+    ". menu12 .";
+    grid-template-columns: 50px 500px 50px;
+    grid-template-rows: 100px 100px 100px 100px 100px  100px 100px 100px 100px 100px 100px 100px 100px ;
+    border-radius: 0px 0px 20px 20px;
+}
+
+
+
+
+#menu1,#menu2,#menu3,#menu4,#menu5,#menu6,#menu7,#menu8,#menu9,#menu10,#menu11,#menu12{
+    background-color:white;
+    height: 90px;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 150px 200px 100px;
+    grid-template-rows: 90px;
+    place-items: center;}
+
+#menu1{
+    grid-area: menu1;
+    grid-template-areas:
+    "circle1 menuname1 numbutton";
+}
+
+
+#menu2{
+    grid-area: menu2;
+    grid-template-areas:
+    "circle2 menuname2 price2";
+}
+
+#menu3{
+    grid-area: menu3;
+    grid-template-areas:
+    "circle3 menuname3 price3";
+}
+
+#menu4{
+    grid-area: menu4;
+    grid-template-areas:
+    "circle4 menuname4 price4";
+}
+#menu5{
+    grid-area: menu5;
+    grid-template-areas:
+    "circle5 menuname5 price5";
+}
+#menu6{
+    grid-area: menu6;
+    grid-template-areas:
+    "circle6 menuname6 price6"
+}
+#menu7{
+    grid-area: menu7;
+    grid-template-areas:
+    "circle7 menuname7 price7"
+}
+#menu8{
+    grid-area: menu8;
+    grid-template-areas:
+    "circle8 menuname8 price"
+}
+#menu9{
+    grid-area: menu9;
+    grid-template-areas:
+    "circle9 menuname9 price"
+}
+#menu10{
+    grid-area: menu10;
+    grid-template-areas:
+    "circle10 menuname10 price"
+}
+#menu11{
+    grid-area: menu11;
+    grid-template-areas:
+    "circle11 menuname11 price"
+}
+#menu12{
+    grid-area: menu12;
+    grid-template-areas:
+    "circle12 menuname12 price"
+}
+
+#matter{
+    font-size: xx-small;
+    color: gray;
+}
+#price1,#price2,#price3,#price4,#price5,#price6,#price7,#price8,#price9,#price10,#price11,#price12{
+    width:100px
+
+}
+#price1>h2,#price2>h2,#price3>h2,#price4>h2,#price5>h2,#price6>h2,#price7>h2,#price8>h2,#price9>h2,#price10>h2,#price11>h2,#price12>h2{
+ color:rgb(0, 0, 0);
+ font-family: 'SEBANG_Gothic_Bold';
+}
+
+
+
+#circle1,#circle2,#circle3,#circle4,#circle5,#circle6,#circle7,#circle8,#circle9,#circle10,#circle11,#circle12{
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+
+}
+#circle1,#circle5,#circle9{
+    background-color: #FFEDD2
+}
+#menu1:hover,#menu5:hover,#menu9:hover{
+    background-color: #FFF6EA;
+}
+
+#circle2,#circle6,#circle10{
+    background-color: #FFBCBC;
+}
+#menu2:hover,#menu6:hover,#menu10:hover{
+    background-color: #f8e3e3;
+}
+
+#circle3,#circle7,#circle11{
+    background-color: #BCDFFF;
+}
+#menu3:hover,#menu7:hover,#menu11:hover{
+    background-color: #E7F3FF;
+}
+#circle4,#circle8,#circle12{
+    background-color: #FFD0A5;
+}
+#menu4:hover,#menu8:hover,#menu12:hover{
+    background-color: #f6e2d0;
+}
+
+
+
+
+#menuname1,#menuname2,#menuname3,#menuname4,#menuname5,#menuname6,#menuname7,#menuname8,#menuname9,#menuname10,#menuname11,#menuname12{
+    width: 250px;
+    text-align: left;
+}
+/* #menuname1{
+    grid-area: menuname1;
+}
+#menuname2{
+    grid-area: menuname2;
+}
+#menuname3{
+    grid-area: menuname3;
+} */
+
+/* 메뉴이름 색상 및 폰트 설정 */
+#menuname1>h3, #menuname1>h5{
+    color:rgb(0, 0, 0);
+font-family: 'SEBANG_Gothic_Bold';
+}
+#menuname2>h3, #menuname2>h5{
+    color:rgb(0, 0, 0);
+    font-family: 'SEBANG_Gothic_Bold';}
+
+#menuname3>h3, #menuname3>h5{
+    color:rgb(0, 0, 0);
+font-family: 'SEBANG_Gothic_Bold';}
+
+#menuname4>h3, #menuname4>h5{
+    color:rgb(0, 0, 0);
+    font-family: 'SEBANG_Gothic_Bold';}
+
+ #menuname5>h3, #menuname5>h5{
+    color:rgb(0, 0, 0);
+font-family: 'SEBANG_Gothic_Bold';}
+
+#menuname6>h3, #menuname6>h5{
+    color:rgb(0, 0, 0);
+    font-family: 'SEBANG_Gothic_Bold';
+    }
+
+#menuname7>h3, #menuname7>h5{
+    color:rgb(0, 0, 0);
+     font-family: 'SEBANG_Gothic_Bold';}
+
+#menuname8>h3, #menuname8>h5{
+    color:rgb(0, 0, 0);
+    font-family: 'SEBANG_Gothic_Bold';}
+
+#menuname9>h3, #menuname9>h5{
+    color:rgb(0, 0, 0);
+    font-family: 'SEBANG_Gothic_Bold';}
+
+#menuname10>h3, #menuname10>h5{
+    color:rgb(0, 0, 0);
+    font-family: 'SEBANG_Gothic_Bold';}
+
+#menuname11>h3, #menuname11>h5{
+    color:rgb(0, 0, 0);
+    font-family: 'SEBANG_Gothic_Bold';}
+
+#menuname12>h3, #menuname12>h5{
+        color:rgb(0, 0, 0);
+        font-family: 'SEBANG_Gothic_Bold';}
+
+
+/* -----------footer부분--------------- */
+#footer{
+    height: 100px;
+    grid-area: footer;
+    background-color: white;
+    opacity:0.7;
+    display: grid;
+    grid-template-areas: ". footer1 footer2 . ";
+    grid-template-columns: 25px 150px 400px 25px ;
+    grid-template-rows: 50px;
+    border-radius:  20px;
+    place-items: center;
+}
+
+#footer1{
+    text-align: center;
+    grid-area: footer1;
+    background-color:#E6E6E6;
+    height: 60px;
+    width: 130px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px #c3c8c6;
+    /* box-shadow: 5px 5px 5px #809089; */
+    border: none;
+    font-family: 'SEBANG_Gothic_Bold'
+
+
+}
+#footer2{
+    grid-area: footer2;
+    background-color:#BBE4BF;
+    box-shadow: 2px 2px 2px #c3c8c6;
+    height: 60px;
+    width: 380px;
+    border-radius: 10px;
+    border:none;
+    font-family: 'SEBANG_Gothic_Bold'
+}
+/* ----메뉴/레시피/마이 구현----- */
+
+#lastfooter{
+    height: 100px;
+    grid-area: lastfooter;
+    background-color: white;
+    display: grid;
+    grid-template-areas: ". lastfooter1 lastfooter2 lastfooter3 . ";
+    grid-template-columns: 25px 180px 180px 180px 25px ;
+    grid-template-rows: 100px;
+    place-items: center;
+}
+
+#lastfooter1{
+    font-size: larger;
+    text-align: center;
+    grid-area: lastfooter1;
+    background-color:white;
+    height: 10px;
+    width: 170px;
+    border: none;
+    font-family: 'SEBANG_Gothic_Bold'
+
+
+}
+#lastfooter2{
+    font-size: larger;
+    grid-area: lastfooter2;
+    background-color:white;
+    height: 10px;
+    width: 170px;
+    border:none;
+    font-family: 'SEBANG_Gothic_Bold'
+}
+
+#lastfooter3{
+    font-size: larger;
+    grid-area: lastfooter3;
+    background-color:white;
+    height: 10px;
+    width: 170px;
+
+    border:none;
+    font-family: 'SEBANG_Gothic_Bold'
+}
+/* 버튼꾸미기 */
+ #numbutton1, #numbutton2,#numbutton3,#numbutton4, #numbutton5, #numbutton6, #numbutton7, #numbutton8, #numbutton9, #numbutton10, #numbutton11, #numbutton12{
+    visibility: hidden;
+    text-align: center;
+
+}
+#numbutton1.active,#numbutton2.active,#numbutton3.active,#numbutton4.active,#numbutton5.active,#numbutton6.active,#numbutton7.active,#numbutton8.active,#numbutton9.active,#numbutton10.active,#numbutton11.active,#numbutton12.active{
+    visibility: visible;
+}
+#minus{
+    width: 20px;
+}
+#minus,#plus,#result1,#result2,#result3,#result4,#result5,#result6,#result7,#result8,#result9,#result10,#result11,#result12{
+    border:none;
+    font-size: large;
+    background-color: transparent;
+    display: inline-block;
+
+}
+
+/* //주문페이지 이동 버튼에 주문 수량 보이도록 */
+#total{
+    background-color: #ffffff;
+    border:white;
+    border-radius: 90px;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: medium;
+}
+
+
+
+
+/* 이모지 */
+#circle1>h1{
+   text-align: center;
+   font-size:45px;
+}
+
+ #circle2>h3,#circle3>h3,#circle4>h3,#circle4>h3,#circle5>h3,#circle6>h3{
+    text-align: center;
+    font-size:28px;
+ }
+
+ #circle7>h3,#circle8>h3,#circle9>h3,#circle10>h3,#circle11>h3{
+    text-align: center;
+    font-size:28px;
+ }
+ #circle12>h3{
+    text-align: center;
+    font-size:45px;
+ }

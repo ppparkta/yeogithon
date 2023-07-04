@@ -61,7 +61,7 @@ class KakaoCallback(View):
         # 로그인
         swuni = Swuni.objects.get(kakaoId=user_info['id'])
         login(request, swuni, 'user.auth.MyBackend')
-        return redirect('http://127.0.0.1:8000/users/')
+        return redirect('http://127.0.0.1:8000/')
 
 # 마이페이지-찜 게시글 목록
 def MyPageLikeList(request, pk):

@@ -7,6 +7,8 @@ from cartProduct.models import CartProduct
 
 # 상품 전체 조회 (권한 제한 X)
 def product_list(request):
+    if not request.user.is_authenticated:
+        return redirect(request, 'user:login')
     products = Product.objects.all().order_by('-pk')
 
     if request.method == 'GET':
@@ -15,8 +17,7 @@ def product_list(request):
     if request.method == 'POST':
 
         swuni = request.user
-        if not request.user.is_authenticated:
-            return redirect(request, 'user:login')
+
         if 'product' in request.POST: #cartProduct 보내달라고 fE에게 요청
             # 카트 상품 폼 제출 처리
             cart = Cart.objects.get(swuni=swuni)

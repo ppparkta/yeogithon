@@ -11,7 +11,6 @@ def add_request(request):
     if request.method == 'POST':
         cart = Cart.objects.filter(swuni=swuni).first()
 
-
         cart_form = CartForm(request.POST)
 
         if cart_form.is_valid():
@@ -20,21 +19,17 @@ def add_request(request):
             cart.save()
 
             order = Order.objects.create(cart=cart)
-            for orderProduct in cart.products.all():
-                # orderProduct = OrderProduct.objects.create(order=order, cart_product=cart.products)
-                orderProduct.order=order
-                orderProduct.save()
+            for cart_product in cart.products.all():
+                order_product = OrderProduct.objects.create(order=order, cart_product=cart_product)
             order.save()
 
-            cart.cartRequest=''
+            cart.cartRequest = ''
             cart.cartTotalPrice = 0
             # return order, order_product
-        return redirect('product:product_list')  #상품 목록페이지
+        return redirect('product:product_list')  # 상품 목록페이지
 
     elif request.method == 'GET':
         cart = Cart.objects.filter(swuni=swuni).first()
         cart_product_list = cart.products.all()
 
         return render(request, 'cart/cart_list.html', {'cart': cart, 'cart_product_list': cart_product_list})
-
-

@@ -14,7 +14,7 @@
   <div class="order-list">
     <form action="#" method="POST">
       {% csrf_token %}
-      {% for order in order %}
+      {% for order in orders %}
         <label for="chk{{ order.id }}">
           <input type="checkbox" id="chk{{ order.id }}" name="menu" value="{{ order.id }}">
           <i class="circle"></i>
@@ -27,12 +27,20 @@
     </form>
   </div>
 
-  <div id="pop_info_1" class="pop_wrap" style="display:none;">
-    <div class="pop_inner">
-      <p class="dsc">메뉴 목록</p>
-      <button type="button" class="btn_close">닫기</button>
+  {% for order in orders %}
+    <div id="pop_info_{{ order.id }}" class="pop_wrap" style="display:none;">
+      <div class="pop_inner">
+        <p class="dsc">메뉴 목록</p>
+        <ul>
+          {% for order_product in order.products.all %}
+            <li>{{ order_product.cart_product.cartProduct.productName }}</li>
+          {% endfor %}
+        </ul>
+        <button type="button" class="btn_close">닫기</button>
+      </div>
     </div>
-  </div>
+  {% endfor %}
+
   <script src="{% static '/js/order.js' %}"></script>
 </body>
 </html>

@@ -14,20 +14,22 @@
 </head>
 <body>
     <div id="wrap">
-        <div id="header1"><br><br><h1>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSwuni's Recipe</h1><br></div>
+        <div id="header1"><br><br><h1>Swuni's Recipe</h1><br></div>
         <div id="section" style="overflow-x:hidden; height:790px; width:600px;">
+            {% for post in post_list %}
             <div id="menu1">
-                {% for post in post_list %}
-                    <br><h3 id="name">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ post.swuniName }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a id="swurecipe">&nbsp&nbsp&nbsp&nbsp{{ post.title }}&nbsp&nbsp&nbsp&nbsp</a></h3>
-                    <br><h3 id="post">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ post.body }} <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h3>
-                    {% if request.user == post.swuniName %}
+                <br><h3 id="name">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ post.swuniName }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a id="swurecipe">&nbsp&nbsp&nbsp&nbsp{{ post.title }}&nbsp&nbsp&nbsp&nbsp</a></h3>
+                <br><h3 id="post">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ post.body }} <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h3>
+                {% if request.user == post.swuniName %}
+                    <div class="button-container">
+                        <form method="GET" action="{% url 'post:post-update' post.id %}">
+                                <button id="update" type="submit">수정</button>
+                        </form>
                         <form action="{% url 'post:post-delete' post.id %}" method="POST">
                             {% csrf_token %}
-                            <input type="submit" value="삭제하기">
+                            <button id="delete" type="submit">삭제</button>
                         </form>
-                        <div>
-                            <a href="{% url 'post:post-update' post.id %}">수정하기</a>
-                        </div>
+                    </div>
                     {% endif %}
                     <form action="{% url 'post:post-like' post.id %}" method='POST'>
                         {% csrf_token %}
@@ -37,11 +39,11 @@
                              <div class="toggle"><button id="ggim"><i class="fa-regular fa-heart"></i></button></div>
                         {% endif %}
                     </form>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         </div>
             <div id="footer1">
-                <button type="button" id="write" onclick="location.href='{% url 'post:post-create' %}'">작성하기</button>
+                <button type="button" id="write" onclick="location.href='write.html'">작성하기</button>
             </div>
 
             <div id="footer2">

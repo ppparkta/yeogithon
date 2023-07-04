@@ -1,4 +1,3 @@
-
 var sum = function(){
     var price1 = parseFloat(document.getElementById("price1").innerText);
     var price2 = parseFloat(document.getElementById("price2").innerText);

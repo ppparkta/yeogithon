@@ -131,6 +131,9 @@ def delete_product(request, pk):
 
     return render(request, 'product/failDelete.html')
 
+# 관리자 페이지 이동 버튼
+def first_admin(request):
+    return render(request, 'product/first_admin.html')
 
 
 

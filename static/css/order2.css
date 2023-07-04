@@ -1,0 +1,152 @@
+@font-face {
+    font-family: 'SEBANG_Gothic_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{margin:0;
+    padding:0;}
+
+body{
+    background-color: rgb(215, 208, 184);
+}
+
+#wrap{
+    background-color: white;
+    width:600px;
+    margin:0 auto;
+    display: grid;
+    grid-template-areas: 
+    "header1 header1"
+    "section section"
+    "lastfooter lastfooter"
+    ;
+    grid-template-columns: 300px 300px;
+    grid-template-rows:  100px 840px 70px;
+
+}
+
+#header1{
+    display: grid;
+    grid-template-areas: 
+    ". headerA headerB .";
+    grid-template-columns: 50px 250px 250px 50px;
+    grid-template-rows:  100px ;
+    place-items: center;  
+}
+#headerA{
+    grid-area: headerA;
+    border-color: #E6E6E6;
+    width: 230PX;
+    height: 70PX;
+    border-radius: 10PX;
+    font-size: larger;
+    font-family: 'SEBANG_Gothic_Bold';
+    color: #544866;
+    border: none;
+
+}
+#headerB{
+    background-color:#FFBCBC;
+    grid-area: headerB;
+    border-color: #E6E6E6;
+    width: 230PX;
+    height: 70PX;
+    border-radius: 10PX;
+    font-size: larger;
+    font-family: 'SEBANG_Gothic_Bold';
+    color: #544866;
+    border: none;
+
+}
+
+#section{ 
+    grid-area:section;
+    display: flex;
+    width: 600PX;
+    height: 700pX;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+
+#menu{
+
+    background: #E1D9FF;
+    border-radius: 10px;
+    width: 380PX;
+    height: 150pX;
+    text-align: center;
+    align-self: auto;
+}
+
+#menu1>h2,#menu1>h3{
+    color:#4F4F4F;
+    text-align: left;
+}
+#menu>h4{
+    color:#4F4F4F;
+    text-align: left;
+    font-weight:500;
+    font-size: large;
+}
+
+
+
+
+#lastfooter{
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width:600px;
+    height: 100px;
+    grid-area: lastfooter;
+    background-color: white;
+    display: grid;
+    grid-template-areas: ". lastfooter1 lastfooter2 lastfooter3 . ";
+    grid-template-columns: 25px 180px 180px 180px 25px ;
+    grid-template-rows: 100px;
+    place-items: center;
+
+}
+
+#lastfooter1{
+    
+    font-size: larger;
+    text-align: center;
+    grid-area: lastfooter1;
+    background-color:white;
+    height: 10px;
+    width: 170px;
+    border: none;
+    font-family: 'SEBANG_Gothic_Bold'
+
+
+}
+#lastfooter2{
+    font-size: larger;
+    grid-area: lastfooter2;
+    background-color:white;
+    height: 10px;
+    width: 170px;
+    border:none;
+    font-family: 'SEBANG_Gothic_Bold'
+}
+
+#lastfooter3{
+
+    font-size: larger;
+    grid-area: lastfooter3;
+    background-color:white;
+    height: 10px;
+    width: 170px;
+    border:none;
+    font-family: 'SEBANG_Gothic_Bold'}
+
+#ggim{
+    color:#FF7676;}
+
+

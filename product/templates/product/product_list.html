@@ -20,7 +20,7 @@
       {% for product in products %}
       {% csrf_token %}
       <div class="col-sm-6">
-
+                <button><a href="http://127.0.0.1:8000/manager/">관리자 페이지</a></button>
                 <div class="card mb-3">
                     <div class="embed-responsive embed-responsive-4by3">
                         <img class="card-img-top embed-responsive-item" src="{{ product.productImage.url }}" width="100" alt="{{ product }}" />
@@ -41,7 +41,7 @@
                 <div class="card-footer">
                     <div class="small text-muted"></div>
                 </div>
-                    <!-- 관리자 권한 있을 때만 수정, 삭제 버튼 표시 -->
+                    <!-- 관리자 권한 있을 때만 보이도록 -->
                     {% if user.is_staff %}
                       {% csrf_token %}
                         <form method="GET" action="{% url 'product:edit_product' pk=product.pk %}">

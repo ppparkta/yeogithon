@@ -43,7 +43,7 @@
             {% endfor %}
         </div>
             <div id="footer1">
-                <button type="button" id="write" onclick="location.href='write.html'">작성하기</button>
+                <button type="button" id="write" onclick="location.href='{% url 'post:post-create' %}'">작성하기</button>
             </div>
 
             <div id="footer2">

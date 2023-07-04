@@ -32,8 +32,8 @@
       <div class="pop_inner">
         <p class="dsc">메뉴 목록</p>
         <ul>
-          {% for product in order.products.all %}
-            <li>{{ product }}</li>
+          {% for order_product in order.products.all %}
+            <li>{{ order_product.cart_product.cartProduct.productName }}</li>
           {% endfor %}
         </ul>
         <button type="button" class="btn_close">닫기</button>

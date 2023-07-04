@@ -1,28 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/recipe.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>SWU Beetle Juice Order System</title>
 </head>
 <body>
-    <h1>Post 목록 화면</h1>
-    {% for post in post_list %}
-        <div>
-            {{ post.id }}<br/>
-            {{ post.title }}<br/>
-            {{ post.regTime }}<br/>
-            {{ post.body }}<br/>
-            {{ post.swuniName }}<br/>
+    <div id="wrap">
+        <div id="header1"><br><br><h1>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSwuni's Recipe</h1><br></div>
+        <div id="section" style="overflow-x:hidden; height:790px; width:600px;">
+            <div id="menu1">
+                {% for post in post_list %}
+                    <br><h3 id="name">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ post.swuniName }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a id="swurecipe">&nbsp&nbsp&nbsp&nbsp{{ post.title }}&nbsp&nbsp&nbsp&nbsp</a></h3>
+                    <br><h3 id="post">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ post.body }} <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h3>
+                    <form action="{% url 'post:post-like' post.id %}" method='POST'>
+                        {% csrf_token %}
+                        {% if request.user in post.like.all %}
+                            <div class="toggle"><button id="ggim"><i class="fa-solid fa-heart"></i></button></div>
+                        {% else %}
+                             <div class="toggle"><button id="ggim"><i class="fa-regular fa-heart"></i></button></div>
+                        {% endif %}
+                    </form>
+                {% endfor %}
+            </div>
         </div>
-        <form action="{% url 'post:post-like' post.id %}" method='POST'>
-            {% csrf_token %}
-            {% if request.user in post.like.all %}
-                <input type="submit" value='찜 취소하기'>
-            {% else %}
-                <input type="submit" value='찜하기'>
-            {% endif %}
-        </form>
-    {% endfor %}
+            <div id="footer1">
+                <button type="button" id="write" onclick="location.href='{% url 'post:post-create' %}'">작성하기</button>
+            </div>
 
+            <div id="footer2">
+                <button type="button" id="menu" onclick="location.href='menu.html'">메뉴</button>
+                <button type="button" id="recipe" onclick="location.href='recipe.html'">레시피</button>
+                <button type="button" id="my" onclick="location.href='order2.html'">마이</button>
+            </div>
+        </div>
+    </div>
+    <script src="{% static '/js/recipe.js'%}"></script>
 </body>
 </html>

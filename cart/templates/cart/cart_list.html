@@ -5,19 +5,17 @@
 </head>
 <body>
     <h1>장바구니</h1>
-    <ul>
-        {% for cart_product in cart_product_list %}
-            <li>{{ cart_product.cartProduct.name }} - 가격: {{ cart_product.cartProduct.price }} (수량: {{ cart_product.cartProductCount }})</li>
-        {% endfor %}
-    </ul>
     <h2>장바구니 총 가격: {{ cart.cartTotalPrice }}</h2>
     <h2>장바구니 요청사항: {{ cart.cartRequest }}</h2>
-    <h2>요청사항 추가하기</h2>
+    <h2>요청사항</h2>
     <form method="post" action="{% url 'cart:add_request' %}">
         {% csrf_token %}
         <!-- 요청사항 폼 필드를 추가하세요 -->
-        <button type="submit">요청사항 추가</button>
+        <div class="form-group">
+            <label for="id_cartRequest">요청사항:</label>
+            <input type="text" id="id_cartRequest" name="cartRequest" value="{{ cart.cartRequest }}">
+        </div>
+        <button type="submit">주문하기</button>
     </form>
 </body>
 </html>
-

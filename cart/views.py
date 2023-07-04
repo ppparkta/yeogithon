@@ -19,22 +19,24 @@ def add_request(request):
             cart.cartRequest = cart_request
             cart.save()
 
-            order = Order.objects.create(cart=cart, order_status='주문 처리 중', OrderProduct=cart.cart_product_list)
-            order_product = OrderProduct(order=order, cartProduct=cart.products.all())
-            order_product.save()
+            order = Order.objects.create(cart=cart)
+            for orderProduct in cart.products:
+                # orderProduct = OrderProduct.objects.create(order=order, cart_product=cart.products)
+                orderProduct.order=order
+                order_product.save()
             order.save()
 
             cart.cartRequest.clear()
             cart.cartTotalPrice.clear()
             return order, order_product
 
-        return redirect('http://127.0.0.1:8000/products')  # 장바구니 상세 페이지로 리디렉션
+        return redirect('product:product_list')  #상품 목록페이지
 
     elif request.method == 'GET':
         cart = Cart.objects.filter(swuni=swuni).first()
 
 
-        cart_product_list = cart.products.all()
+        cart_product_list = cart.products
 
         return render(request, 'cart/cart_list.html', {'cart': cart, 'cart_product_list': cart_product_list})
 

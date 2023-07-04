@@ -6,7 +6,6 @@ from orderProduct.models import OrderProduct
 # Create your views here.
 
 
-# 전체 주문 조회 (GET), 주문 상태 변경 (POST)
 def view_all_order(request, pk):
     if request.method == 'GET':
         order = Order.objects.all()
@@ -23,3 +22,5 @@ def view_all_order(request, pk):
             order = Order.objects.get(pk=pk)
             order.order_status = '완료'
             order.save()
+
+        return redirect(request, 'order:admin_order_list')

@@ -15,19 +15,24 @@ def product_list(request):
     if request.method == 'POST':
 
         swuni = request.user
-        if 'cartProduct' in request.POST: #cartProduct 보내달라고 fE에게 요청
+        if 'product' in request.POST: #cartProduct 보내달라고 fE에게 요청
             # 카트 상품 폼 제출 처리
             cart = Cart.objects.get(swuni=swuni)
 
             cartProduct_Form = CartProductForm(request.POST)
             if cartProduct_Form.is_valid():
-                cart_product = cartProduct_Form.save(commit=False)
-                cart_product.cart = cart
-                cart_product.save()
-                return render(request, 'product/product_list.html', {'products': products, 'cart_product': cart.products.all()})
+
+                cartProduct = cartProduct_Form.cleaned_data['cartProductCount', 'cartProduct']
+                cartProduct.cart = cart
+                # cart.products=cart_product.cartProduct
+                # cart_product_list =[]
+                # cart_product_list.append(cart.products)
+                # cart.products = cart_product_list
+                cartProduct.save()
+                return render(request, 'product/product_list.html', {'products': products, 'cartProduct': cartProduct})
 
 
-        elif 'order' in request.POST:
+        elif 'product' in request.POST:
 
             # 총 가격 계산 요청 처리
 

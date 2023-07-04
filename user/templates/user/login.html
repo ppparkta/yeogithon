@@ -1,11 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <title>SWU Beetle Juice Order System</title>
 </head>
 <body>
-    <h3>로그인</h3>
-    <a href="http://127.0.0.1:8000/users/oauth">카카오 로그인</a>
+    <div id="section" style="overflow-x:hidden;">
+        
+        <div id="title"><h1>SWU Beetle Juice<br>Order System</h1></div>
+        <div><img id="juice" src="{% static 'css/juice.png' %}" alt="juice image"></div>
+
+        <a class="btn" href="http://127.0.0.1:8000/users/oauth">
+            <div id="login">
+                <img id="kakao" src="{% static 'css/kakao.png' %}" alt="kakaotalk logo">
+                <span class="btn_txt">카카오로 시작하기</span>
+            </div>
+        </a>
+    
+    </div>
 </body>
 </html>

@@ -1,19 +1,25 @@
 from django.shortcuts import render
+import cart.views
 from .forms import OrderForm
 from .models import Order
-from cart.models import Cart
+from orderProduct.models import OrderProduct
 # Create your views here.
 
-def create_Order(request):
+
+#관리자 시점 주문 내역 조회
+def view_all_order(request,pk):
+    if request.method == 'GET':
+        order = Order.objects.all()
+
+        return render(request, 'order/admin_order_list', {'order': order})
+
     if request.method == 'POST':
-        # 카트 정보 가져오기
-        cart = get_object_or_404(Cart, pk=cart_id)
+        if 'order_status_cancel' in request.POST:
+            order = Order.objects.get(pk=pk)
+            order.order_status = '취소'
+            order.save()
 
-        # 주문 객체 생성
-        order = Order.objects.create(cart=cart, order_status='주문 처리 중', OrderProduct=cart.cart_product_list)
-
-        return render(request, 'product/product_list.html', {'message': '주문이 성공적으로 생성되었습니다.'})
-    else:
-        # GET 요청 처리 로직 작성
-        return render(request, 'cart/cart_list.html')
-
+        elif 'order_status_success' in request.POST:
+            order = Order.objects.get(pk=pk)
+            order.order_status = '완료'
+            order.save()

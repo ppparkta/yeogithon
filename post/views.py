@@ -23,6 +23,8 @@ def post_detail_view(request, id): # 세부 글 조회
 
 @login_required
 def post_create_view(request): # 글 생성
+    if not request.user.is_authenticated:
+        return redirect('user:login')
     if request.method == 'GET':
         return render(request, 'post/post_form.html')
     else:
@@ -41,6 +43,8 @@ def post_create_view(request): # 글 생성
         return redirect('post:post-list')
 
 def post_update_view(request, id): # 글 수정
+    if not request.user.is_authenticated:
+        return redirect('user:login')
 
     post = get_object_or_404(Post,id=id) # 존재하지 않는 글은 404 에러 뜨게
 
@@ -58,6 +62,9 @@ def post_update_view(request, id): # 글 수정
         return redirect('post:post-list')
 
 def post_delete_view(request, id): # 글 삭제
+    if not request.user.is_authenticated:
+        return redirect('user:login')
+
     post = get_object_or_404(Post, id=id)  # 존재하지 않는 글은 404 에러 뜨게
     if request.method == 'POST':
         # 삭제하면 삭제 후 index 페이지로
@@ -67,6 +74,8 @@ def post_delete_view(request, id): # 글 삭제
 def post_like(request, id): #찜
     post = get_object_or_404(Post, id=id)
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return redirect('user:login')
         if post.like.filter(id=request.user.id).exists(): # 찜 이미 누른 상태일 때
             post.like.remove(request.user) # 찜 취소
             post.save()

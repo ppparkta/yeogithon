@@ -62,7 +62,7 @@ def create_product(request):
     swuni = request.user  # 현재 로그인한 사용자 정보 가져오기
 
     if not swuni.is_authenticated:  # 권한이 없다면
-        return render(request, 'product/401.html', status=401)  # 401 이동
+        return redirect('user:login')  # 로그인 페이지 이동
 
     if request.method == "POST":
         productName = request.POST.get('productName')
@@ -89,8 +89,7 @@ def edit_product(request, pk):
     swuni = request.user  # 현재 로그인한 사용자 정보 가져오기
 
     if not swuni.is_authenticated:  # 권한이 없다면
-        return render(request, 'product/401.html', status=401)  # 401 이동
-
+        return redirect('user:login')  # 로그인 페이지 이동
     product = get_object_or_404(Product, pk=pk)
 
     if request.method == "POST":
@@ -124,8 +123,7 @@ def delete_product(request, pk):
     swuni = request.user  # 현재 로그인한 사용자 정보 가져오기
 
     if not swuni.is_authenticated:  # 권한이 없다면
-        return render(request, 'product/401.html', status=401)  # 401 이동
-
+        return redirect('user:login')  # 로그인 페이지 이동
     if request.method == "GET":
         product = Product.objects.get(id=pk)
         product.delete()

@@ -38,7 +38,7 @@ def post_create_view(request): # 글 생성
             body=body,
             swuniName=swuni,
         )
-        return redirect('index')
+        return redirect('post:post-list')
 
 def post_update_view(request, id): # 글 수정
 
@@ -55,7 +55,7 @@ def post_update_view(request, id): # 글 수정
         post.body = body
         post.save()
 
-        return redirect('post:post-detail', post.id)
+        return redirect('post:post-list')
 
 def post_delete_view(request, id): # 글 삭제
     post = get_object_or_404(Post, id=id)  # 존재하지 않는 글은 404 에러 뜨게

@@ -25,6 +25,9 @@
                             {% csrf_token %}
                             <input type="submit" value="삭제하기">
                         </form>
+                        <div>
+                            <a href="{% url 'post:post-update' post.id %}">수정하기</a>
+                        </div>
                     {% endif %}
                     <form action="{% url 'post:post-like' post.id %}" method='POST'>
                         {% csrf_token %}
@@ -42,9 +45,9 @@
             </div>
 
             <div id="footer2">
-                <button type="button" id="menu" onclick="location.href='menu.html'">메뉴</button>
-                <button type="button" id="recipe" onclick="location.href='recipe.html'">레시피</button>
-                <button type="button" id="my" onclick="location.href='order2.html'">마이</button>
+                <a href="http://127.0.0.1:8000/" id="menu">메뉴</a>
+                <a href="http://127.0.0.1:8000/post/" id="recipe">레시피</a>
+                <a href="http://127.0.0.1:8000/users/{{ request.user.pk }}/likes/“ id="my">마이</a>
             </div>
         </div>
     </div>

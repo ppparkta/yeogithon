@@ -33,9 +33,7 @@ def add_request(request):
 
     elif request.method == 'GET':
         cart = Cart.objects.filter(swuni=swuni).first()
-
-
-        cart_product_list = cart.products
+        cart_product_list = cart.products.all()
 
         return render(request, 'cart/cart_list.html', {'cart': cart, 'cart_product_list': cart_product_list})
 

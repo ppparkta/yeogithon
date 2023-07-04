@@ -13,10 +13,14 @@
     <p>
       <a href="{% url 'product:create_product' %}"><i class="bi-plus"></i>등록</a>
     </p>
+
+
+
     <ul class="list-group">
       {% for product in products %}
       {% csrf_token %}
       <div class="col-sm-6">
+
                 <div class="card mb-3">
                     <div class="embed-responsive embed-responsive-4by3">
                         <img class="card-img-top embed-responsive-item" src="{{ product.productImage.url }}" width="100" alt="{{ product }}" />
@@ -33,22 +37,26 @@
                         {% if product.productTemp == "HOT" %}
                             <h5>HOT</h5>
                         {% endif %}
-                        <form method="GET" action="{% url 'product:edit_product' pk=product.pk %}">
-                        <button type="submit" class="btn btn-outline-dark">수정</button>
-                        </form>
-                        <form method="GET" action="{% url 'product:delete_product' pk=product.pk %}">
-                        <button type="submit" class="btn btn-outline-dark">삭제</button>
-                        </form>
                     </div>
                 <div class="card-footer">
                     <div class="small text-muted"></div>
                 </div>
+                    <!-- 관리자 권한 있을 때만 수정, 삭제 버튼 표시 -->
+                    {% if user.is_staff %}
+                      {% csrf_token %}
+                        <form method="GET" action="{% url 'product:edit_product' pk=product.pk %}">
+                          <button type="submit" class="btn btn-outline-dark">수정</button>
+                        </form>
+                        <form method="GET" action="{% url 'product:delete_product' pk=product.pk %}">
+                          <button type="submit" class="btn btn-outline-dark">삭제</button>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
       {% endfor %}
     </ul>
     <h2>장바구니에 상품 추가하기</h2>
-    <form method="post" action="{% url 'product:product_list' %}">
+    <form method="POST" action="{% url 'product:product_list' %}">
         {% csrf_token %}
         <input type="hidden" name="product_id" value="{{ product.id }}">
         <!-- 필요한 경우 다른 필드를 추가하세요 -->

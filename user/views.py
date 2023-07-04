@@ -7,6 +7,8 @@ from django.views.generic import View, CreateView, UpdateView, DeleteView
 import order.models
 import post.models
 from cart.models import Cart
+from order.models import Order
+from orderProduct.models import OrderProduct
 from .models import Swuni
 import requests
 
@@ -63,18 +65,21 @@ class KakaoCallback(View):
 
 # 마이페이지-찜 게시글 목록
 def MyPageLikeList(request, pk):
-    if not request.user.is_authenticated:
-        return render(request, 'user/401.html', status=401)
-    if not request.user.pk == pk:
-        return render(request, 'user/403.html', status=403)
-    list = post.models.Post.objects.filter(like=pk)
-    return render(request, 'user/mypageLikes.html', { "likes": list })
+    if request.method == 'GET':
+        if not request.user.is_authenticated:
+            return render(request, 'user/401.html', status=401)
+        if not request.user.pk == pk:
+            return render(request, 'user/403.html', status=403)
+        list = post.models.Post.objects.filter(like=pk)
+        return render(request, 'user/mypageLikes.html', { "likes": list })
 
 # 마이페이지-주문 목록
 def MyPageOrderList(request, pk):
-    if not request.user.is_authenticated:
-        return render(request, 'user/401.html', status=401)
-    if not request.user.pk == pk:
-        return render(request, 'user/403.html', status=403)
-    list = order.models.Order.objects.filter(swuni=pk)
-    return render(request, 'user/mypageOrders.html', { "orders": list })
+    if request.method == 'GET':
+        if not request.user.is_authenticated:
+            return render(request, 'user/401.html', status=401)
+        if not request.user.pk == pk:
+            return render(request, 'user/403.html', status=403)
+        cart = Cart.objects.get(swuni=request.user)
+        list = Order.objects.filter(cart=cart)
+        return render(request, 'user/mypageOrders.html', { "orders": list })

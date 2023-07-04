@@ -8,9 +8,15 @@
     <h1>마이페이지 - 주문목록</h1>
     <div>
         {% for order in orders %}
-        <h2>{{ order.title }}</h2>
-        <h3>{{ order.swuni.userName }}</h3>
-        <div>{{ order.body }}</div>
+            {% for order_product in order.products.all %}
+                <p>
+                    {{ order_product.cart_product.cartProduct.productName}} -
+                    {{ order_product.cart_product.cartProductCount }},
+                </p>
+            {% endfor %}
+        <h2>{{ order.cart.swuni.userName }}</h2>
+        <h3>{{ order.order_status }}</h3>
+        <div>{{ order.order_time }}</div>
         <hr>
         {% endfor %}
     </div>

@@ -22,5 +22,5 @@ def view_all_order(request):
                 order.order_status = '완료'
                 order.save()
 
-    orders = Order.objects.all()
-    return render(request, 'order/admin_order_list.html', {'order': orders})
+    orders = Order.objects.prefetch_related('products')
+    return render(request, 'order/admin_order_list.html', {'orders': orders})

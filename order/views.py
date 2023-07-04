@@ -6,8 +6,8 @@ from orderProduct.models import OrderProduct
 # Create your views here.
 
 
-#관리자 시점 주문 내역 조회
-def view_all_order(request,pk):
+# 전체 주문 조회 (GET), 주문 상태 변경 (POST)
+def view_all_order(request, pk):
     if request.method == 'GET':
         order = Order.objects.all()
 

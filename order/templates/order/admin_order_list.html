@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>주문 내역 확인</title>
+  <link rel="stylesheet" href="{% static '/css/order.css' %}">
+</head>
+<body>
+  <div class="back"><a href="admin_order_list.html"><img src="{% static '/back.png' %}"></a></div>
+  <div class="header">
+    <h1>주문 내역</h1>
+  </div>
+  <div class="order-list">
+    <form action="#" method="POST">
+      {% csrf_token %}
+      {% for order in order %}
+        <label for="chk{{ order.id }}">
+          <input type="checkbox" id="chk{{ order.id }}" name="menu" value="{{ order.id }}">
+          <i class="circle"></i>
+          <div id="box">{{ order.cart.swuni }} - {{ order.order_status }}</div>
+          <a href="#pop_info_{{ order.id }}" class="btn_open">+</a>
+        </label>
+      {% endfor %}
+      <button type="submit" name="order_status_cancel" class="btn_cancel">취소</button>
+      <button type="submit" name="order_status_success" class="btn_success">완료</button>
+    </form>
+  </div>
+
+  <div id="pop_info_1" class="pop_wrap" style="display:none;">
+    <div class="pop_inner">
+      <p class="dsc">메뉴 목록</p>
+      <button type="button" class="btn_close">닫기</button>
+    </div>
+  </div>
+  <script src="{% static '/js/order.js' %}"></script>
+</body>
+</html>

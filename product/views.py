@@ -130,3 +130,9 @@ def delete_product(request, pk):
         return redirect(reverse('product:product_list'))
 
     return render(request, 'product/failDelete.html')
+
+
+
+
+
+

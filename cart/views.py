@@ -8,6 +8,7 @@ from user.models import Swuni
 #폼으로 입력 받아서 장바구니 요청사항 생성후 카트 저장
 def add_request(request):
     swuni = request.user
+
     if request.method == 'POST':
         cart = Cart.objects.filter(swuni=swuni).first()
 
@@ -29,6 +30,8 @@ def add_request(request):
         return redirect('product:product_list')  # 상품 목록페이지
 
     elif request.method == 'GET':
+        if not request.user.is_authenticated:
+            return redirect('user:login')
         cart = Cart.objects.filter(swuni=swuni).first()
         cart_product_list = cart.products.all()
 

@@ -18,8 +18,8 @@ import requests
 def oauth_login(request):
     return render(request, './user/login.html', {})
 
-def home(request):
-    return render(request, './user/home.html', {})
+# def home(request):
+#     return render(request, './user/home.html', {})
 
 # 인가 코드 요청
 class Kakao(View):
@@ -67,7 +67,7 @@ class KakaoCallback(View):
 def MyPageLikeList(request, pk):
     if request.method == 'GET':
         if not request.user.is_authenticated:
-            return render(request, 'user/401.html', status=401)
+            return render(request, 'user/login.html', status=401)
         if not request.user.pk == pk:
             return render(request, 'user/403.html', status=403)
         list = post.models.Post.objects.filter(like=pk)
@@ -77,7 +77,7 @@ def MyPageLikeList(request, pk):
 def MyPageOrderList(request, pk):
     if request.method == 'GET':
         if not request.user.is_authenticated:
-            return render(request, 'user/401.html', status=401)
+            return render(request, 'user/login.html', status=401)
         if not request.user.pk == pk:
             return render(request, 'user/403.html', status=403)
         cart = Cart.objects.get(swuni=request.user)

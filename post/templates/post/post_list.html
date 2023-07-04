@@ -20,6 +20,12 @@
                 {% for post in post_list %}
                     <br><h3 id="name">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ post.swuniName }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a id="swurecipe">&nbsp&nbsp&nbsp&nbsp{{ post.title }}&nbsp&nbsp&nbsp&nbsp</a></h3>
                     <br><h3 id="post">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ post.body }} <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h3>
+                    {% if request.user == post.swuniName %}
+                        <form action="{% url 'post:post-delete' post.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="삭제하기">
+                        </form>
+                    {% endif %}
                     <form action="{% url 'post:post-like' post.id %}" method='POST'>
                         {% csrf_token %}
                         {% if request.user in post.like.all %}

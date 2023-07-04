@@ -59,19 +59,10 @@ def post_update_view(request, id): # 글 수정
 
 def post_delete_view(request, id): # 글 삭제
     post = get_object_or_404(Post, id=id)  # 존재하지 않는 글은 404 에러 뜨게
-    if request.method == 'GET':
-        context = {
-            'post' : post
-        }
-        return render(request, 'post/post_confirm_delete.html', context)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         # 삭제하면 삭제 후 index 페이지로
         post.delete()
-        return redirect('index')
-    # if request.method == 'POST':
-    #     # 삭제하면 삭제 후 index 페이지로
-    #     post.delete()
-    #     return redirect('index')
+        return redirect('post:post-list')
 
 def post_like(request, id): #찜
     post = get_object_or_404(Post, id=id)

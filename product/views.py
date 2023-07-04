@@ -12,9 +12,11 @@ def product_list(request):
         return render(request, 'product/product_list.html', context={'products': products})
 
     if request.method == 'POST':
-        if 'cartProduct' in request.POST:
+        swuni = request.user
+        if 'cartProduct' in request.POST: #cartProduct 보내달라고 fE에게 요청
             # 카트 상품 폼 제출 처리
-            cart = Cart.objecst.filter(request.user.pk == swuni.pk)
+            cart = Cart.objects.get(swuni=swuni)
+
             cartProduct_Form = CartProductForm(request.POST)
             if cartProduct_Form.is_valid():
                 cart_product = cartProduct_Form.save(commit=False)
@@ -23,12 +25,11 @@ def product_list(request):
                 return render(request, 'product/product_list.html', {'product': product, 'cart_product': cart.products.all()})
 
 
-        elif 'calculateTotalPrice' in request.POST:
+        elif 'order' in request.POST:
 
             # 총 가격 계산 요청 처리
 
-            cart = Cart.objecst.filter(request.user.pk == swuni.pk)
-
+            cart = Cart.objects.filter(swuni).first()
             cart_product_list = cart.products.all()
 
             total_price = 0

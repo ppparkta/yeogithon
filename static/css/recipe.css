@@ -3,194 +3,193 @@
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Bold.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}
+  }
 
-*{margin:0; padding:0;}
+  * {
+    margin: 0;
+    padding: 0;
+  }
 
-body{
+  body {
     background-color: rgb(215, 208, 184);
-}
+  }
 
-#wrap{
+  #wrap {
     background-color: white;
-    width:600px;
-    margin:0 auto;
-    display: grid;
-    grid-template-areas: 
-    "header1 header1"
-    "section section"
-    "footer1 footer1"
-    "footer2 footer2"
-    ;
-    grid-template-columns: 100px 500px;
-    grid-template-rows:  100px 800px 70px 40px;
-}
+    width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-/* 맨 위 배너 */
-
-#header1>h1{
-    color:#544866;
+  #header1>h1 {
+    color: #544866;
     font-family: 'Lilita One';
-    font-size:43px;
-}
+    font-size: 43px;
+    margin-top: 40px;
+  }
 
-#header1{
-    grid-area: header1;
-    background-color:white;
+  #header1 {
+    background-color: white;
     height: 90px;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-/* 레시피 메뉴 */
-#section{ 
-    height: 700pX;
-    grid-area: section;
-    grid-template-areas:
-    "menu1"
-    "menu2"
-    "menu3";
-    display: grid;
-    grid-template-columns: 600px;
-    grid-template-rows: 170px 170px 170px;
-    place-items: center;
-    
-}
+  #section {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 790px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 40px;
+  }
 
-#menu1{
-    grid-area: menu1;
-    background: #FFEDD2;
+  #menu1 {
+    margin-bottom: 20px;
+    background-color: #FFEDD2;
     border-radius: 10px;
-    width: 380PX;
-    height: 150pX;
-    color:#4F4F4F;
+    width: 380px;
+    height: 180px;
+    color: #4f4f4f;
     text-align: left;
-}
+    padding-left: 20px;
+  }
 
-#menu2{
-    grid-area: menu2;
-    background:#E1D9FF;
-    border-radius: 10px;
-    width: 380PX;
-    height: 150pX;
-    color:#4F4F4F;
-    text-align: left;
-}
-
-#menu3{
-    grid-area: menu3;
-    background:#D9EDFF;
-    border-radius: 10px;
-    width: 380PX;
-    height: 150pX;
-    color:#4F4F4F;
-    text-align: left;
-}
-
-#swurecipe{
+  #swurecipe {
     font-size: larger;
-    background-color:white;
+    background-color: white;
     height: 30px;
     width: 170px;
-    border:none;
+    border: none;
     border-radius: 10px;
-    font-family: 'SEBANG_Gothic_Bold'
-}
+    font-family: 'SEBANG_Gothic_Bold';
+  }
 
-.toggle{
-    border: 5px #FF7676;
-}
-
-#ggim{
-    color:#FF7676;
-    border: 1px #FF7676;
-    cursor: pointer;
-    position: relative;
-    left: 340px;
-}
-
-i{
-    background-color: transparent;
-    position: relative;
-}
-
-.fa-regular.fa-heart {
-    font-size: 20px;
-}
-
-/* -----------footer부분--------------- */
-
-#footer1{
-    height: 100px;
-    grid-area: footer1;
-    background-color:white;
-    display: grid;
-    grid-template-areas:". btn .";
-    /* grid-template-columns: 25px 550px 25px; */
-    grid-template-rows: 50px;
-    place-items: center;
+  .toggle {
+    border: 5px #ff7676;
+    display: flex;
     justify-content: flex-end;
-    padding-right: 120px;
-}
+    padding-right: 20px;
+  }
 
-#write{
+  #ggim {
+    color: #ff7676;
+    border: 1px #ff7676;
+    cursor: pointer;
+  }
+
+  i {
+    background-color: transparent;
+  }
+
+  .fa-regular.fa-heart {
+    font-size: 20px;
+  }
+
+  #update{
+    font-family: 'SEBANG_Gothic_Bold';
+    font-size: 15px;
+    color: #544866;
+    text-align: center;
+    height: 25px;
+    width: 40px;
+    border: none;
+    background-color: #ffc9c9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    margin-left: 30px;
+  }
+
+  #delete {
+    font-family: 'SEBANG_Gothic_Bold';
+    font-size: 15px;
+    color: #544866;
+    text-align: center;
+    height: 25px;
+    width: 40px;
+    border: none;
+    background-color: #ffc9c9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+
+  #update:hover,
+  #delete:hover {
+    background-color: #faacac;
+    transition: 0.3s;
+  }
+
+  #footer1 {
+    height: 100px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+  }
+
+  #write {
     font-family: 'SEBANG_Gothic_Bold';
     font-size: 20px;
-    color:#544866;
+    color: #544866;
     text-align: center;
-    grid-area: btn;
     height: 60px;
     width: 200px;
     border: none;
-    background-color:#BBE4BF;
+    background-color: #bbe4bf;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-}
+  }
 
-#write:hover{
+  #write:hover {
     background-color: rgb(148, 225, 148);
     transition: 0.7s;
-}
+  }
 
-/* ----메뉴/레시피/마이 구현----- */
-
-
-#footer2{
+  #footer2 {
     height: 100px;
-    grid-area: footer2;
     background-color: white;
-    display: grid;
-    grid-template-areas: ". menu recipe my . ";
-    grid-template-columns: 25px 180px 180px 180px 25px ;
-    grid-template-rows: 100px;
-    place-items: center;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-#menu{
+  #menu,#recipe,#my {
     font-size: larger;
     text-align: center;
-    grid-area: menu;
-    background-color:white;
+    background-color: white;
     height: 10px;
     width: 170px;
     border: none;
-    font-family: 'SEBANG_Gothic_Bold'
-}
+    font-family: 'SEBANG_Gothic_Bold';
+    margin: 0 10px;
+  }
 
-#recipe{
+  .link {
     font-size: larger;
-    grid-area: recipe;
-    background-color:white;
+    text-align: center;
+    background-color: white;
     height: 10px;
     width: 170px;
-    border:none;
-    font-family: 'SEBANG_Gothic_Bold'
+    border: none;
+    font-family: 'SEBANG_Gothic_Bold';
+    margin: 0 10px;
+    color: #000000;
+    text-decoration: none; /* 하이퍼링크 밑줄 제거 */
 }
 
-#my{
-    font-size: larger;
-    grid-area: my;
-    background-color:white;
-    height: 10px;
-    width: 170px;
-    border:none;
-    font-family: 'SEBANG_Gothic_Bold'
-}
+    .button-container {
+        display: flex;
+    }
+
+    .button-container form {
+        margin-right: 10px;
+    }

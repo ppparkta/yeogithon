@@ -7,11 +7,13 @@ from cartProduct.models import CartProduct
 
 # 상품 전체 조회 (권한 제한 X)
 def product_list(request):
+    products = Product.objects.all().order_by('-pk')
+
     if request.method == 'GET':
-        products = Product.objects.all().order_by('-pk')
         return render(request, 'product/product_list.html', context={'products': products})
 
     if request.method == 'POST':
+
         swuni = request.user
         if 'cartProduct' in request.POST: #cartProduct 보내달라고 fE에게 요청
             # 카트 상품 폼 제출 처리
@@ -22,7 +24,7 @@ def product_list(request):
                 cart_product = cartProduct_Form.save(commit=False)
                 cart_product.cart = cart
                 cart_product.save()
-                return render(request, 'product/product_list.html', {'product': product, 'cart_product': cart.products.all()})
+                return render(request, 'product/product_list.html', {'products': products, 'cart_product': cart.products.all()})
 
 
         elif 'order' in request.POST:
@@ -46,7 +48,7 @@ def product_list(request):
     # 다른 경우 처리 또는 필요한 경우 폼을 다시 렌더링
     cartProduct_Form = CartProductForm()
     cart_form = CartForm()
-    return render(request, 'product/product_list.html', {'cartProduct_Form': cartProduct_Form, 'cart_form': cart_form})
+    return render(request, 'product/product_list.html', {'products': products, 'cartProduct_Form': cartProduct_Form, 'cart_form': cart_form})
 
 
 
@@ -59,12 +61,14 @@ def create_product(request):
 
     if request.method == "POST":
         productName = request.POST.get('productName')
+        productDetail = request.POST.get('productDetail')
         productPrice = request.POST.get('productPrice')
         productImage = request.FILES.get('productImage')
         productTemp = request.POST.get('productTemp')
 
         Product.objects.create(
             productName=productName,
+            productDetail=productDetail,
             productPrice=productPrice,
             productImage=productImage,
             productTemp=productTemp
@@ -86,6 +90,7 @@ def edit_product(request, pk):
 
     if request.method == "POST":
         productName = request.POST.get('productName')
+        productDetail = request.POST.get('productDetail')
         productPrice = request.POST.get('productPrice')
         productImage = request.FILES.get('productImage')
         productTemp = request.POST.get('productTemp')
@@ -98,6 +103,7 @@ def edit_product(request, pk):
         # 데이터 변경
         product.productName = productName
         product.productPrice = productPrice
+        product.productDetail = productDetail
         product.productImage = productImage
         product.productTemp = productTemp
 

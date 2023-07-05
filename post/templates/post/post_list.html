@@ -45,11 +45,10 @@
             <div id="footer1">
                 <button type="button" id="write" onclick="location.href='{% url 'post:post-create' %}'">작성하기</button>
             </div>
-
             <div id="footer2">
-                <a href="http://127.0.0.1:8000/" id="menu">메뉴</a>
-                <a href="http://127.0.0.1:8000/post/" id="recipe">레시피</a>
-                <a href="http://127.0.0.1:8000/users/{{ request.user.pk }}/likes/" id="my">마이</a>
+                <a href="http://127.0.0.1:8000/" class="link" id="menu">메뉴</a>
+                <a href="http://127.0.0.1:8000/post/" class="link" id="recipe">레시피</a>
+                <a href="http://127.0.0.1:8000/users/{{ request.user.pk }}/likes/" class="link" id="my">마이</a>
             </div>
         </div>
     </div>

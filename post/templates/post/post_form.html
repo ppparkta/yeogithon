@@ -17,7 +17,7 @@
         <div id="header1"><br><br><h1>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSwuni's Recipe</h1><br></div>
         <div id="section" style="overflow-x:hidden; height:790px; width:600px;">
             <form action="" method="POST">{% csrf_token %}
-                <label for="title">제목:</label>
+                <label for="title">과일 조합:</label>
                 <textarea id= "title" name="title">{{ post.title }}</textarea><br><br>
                 <label for="content">내용:</label>
                 <textarea id= "content" name="body">{% if post %}{{ post.body }}{% endif %}</textarea><br><br>
@@ -27,9 +27,9 @@
             </form>
         </div>
             <div id="footer2">
-                <a href="http://127.0.0.1:8000/" id="menu">메뉴</a>
-                <a href="http://127.0.0.1:8000/post/" id="recipe">레시피</a>
-                <a href="http://127.0.0.1:8000/users/{{ request.user.pk }}/likes/" id="my">마이</a>
+                <a href="http://127.0.0.1:8000/" class="link" id="menu">메뉴</a>
+                <a href="http://127.0.0.1:8000/post/" class="link" id="recipe">레시피</a>
+                <a href="http://127.0.0.1:8000/users/{{ request.user.pk }}/likes/" class="link" id="my">마이</a>
             </div>
         </div>
     </div>

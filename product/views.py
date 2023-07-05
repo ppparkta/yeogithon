@@ -7,7 +7,11 @@ from cartProduct.models import CartProduct
 
 # 상품 전체 조회 (권한 제한 X)
 def product_list(request):
+
     products = Product.objects.all().order_by('-pk')
+
+    if not request.user.is_authenticated:
+        return redirect('user:login')  # 로그인 페이지 이동
 
     if request.method == 'GET':
         return render(request, 'product/product_list.html', context={'products': products})

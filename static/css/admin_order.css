@@ -1,59 +1,58 @@
 @font-face {
-  font-family: 'SBAggroB';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+  font-family: 'SEBANG_Gothic_Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Bold.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
-@font-face {
-  font-family: 'SUITE-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
+.container {
+  display: flex;
+  transform: translateX(-2%);
+  width:600px;
+  height: 1100px;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
 }
 .header{
     vertical-align: top;
+    left: 2000px;
     position: absolute;
     width: 400px;
     height: 40px;
-    left: 71px;
-    top: 140px;
-    background: #E6E6E6;
+    top:80px;
+    left: 50%;
+    transform: translateX(-50%);
     border-radius: 10px;
+
 }
 .order-list{
 position: absolute;
-width: 400px;
-height: 500px;
+width: 500px;
+height: 700px;
 left: 71px;
-top: 200px;
+top: 180px;
 background: #FFEDD2;
 border-radius: 10px;
 overflow-y:scroll;
-}
-.menu{
-background: #FFFFFF;
-border-radius: 20px;
-font-size: 17px;
-font-family: 'SUITE-Regular';
+    margin: 0 auto;
 
 }
+
 h1{
     position: absolute;
-    width: 200px;
-    height: 49px;
     font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
+    font-size:48px;
     line-height: 20px;
     color: #544866;
-    font-family: 'SBAggroB';
-    left: 15px;
+    font-family: 'Lilita One', cursive;
+    left: 40px;
+
 }
 .button-container {
   display: flex;
   position: absolute;
-  left: 71px;
-  top: 700px;
+  left: 130px;
+  top: 900px;
 }
 form{ padding: 15px; }
 .circle{
@@ -109,7 +108,7 @@ button{
   margin-right: 30px;
   margin-top: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-family: 'SUITE-Regular';
+  font-family: 'SEBANG_Gothic_Bold';
   width: 100px;
 }
 .success:hover{
@@ -122,24 +121,14 @@ button{
   transition: 0.7s;
   color: whitesmoke;
 }
-.back {
-  position: absolute;
-  top: 80px;
-  left: 70px;
-}
-.back img {
-  width: 25px;
-  height: 25px;
-  position: fixed;
-}
 a{text-decoration:none;}
 .btn_open{ float: right; border-radius:8px; margin-top:14px; padding:2px 6px; background:lightcoral; color:#fff; font-family: 'SUITE-Regular';}
 .pop_wrap{position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,.5); font-size:0; text-align:center;}
 .pop_wrap:after{display:inline-block; height:100%; vertical-align:middle; content:'';}
 .pop_wrap .pop_inner{display:inline-block; padding:20px 30px; background:#fff; width:200px; vertical-align:middle; font-size:15px;}
 #box {
-  background-color: #ffffff;
-  width: 248px;
+  background-color: #FFFFFF;
+  width: 300px;
   height: 2px;
   margin: auto;
   text-align: left;
@@ -149,4 +138,25 @@ a{text-decoration:none;}
   display: inline-block;
   line-height: 5px;
   margin-left: 5px;
+  font-family: 'SEBANG_Gothic_Bold';
+
+}
+
+
+body {
+  display: flex;
+  background-color: rgb(215, 208, 184);
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+}
+
+.back img {
+  width: 30px;
+  height: 30px;
+}
+
+.back{
+  margin-left: 20px;
+margin-top: 10px;
 }

@@ -1,92 +1,71 @@
-var totalnum=0;
-function totalnums(){
+var total = 0;
+var totalElement = document.getElementById("total");
 
-  const numbuttons=document.querySelectorAll("#numbutton");
-
- totalnum = Array.from(numbuttons).reduce((total, numbutton) => {
-    const count = parseInt(numbutton.dataset.count);
-    return total + count;
-  }, 0);
-  document.getElementById("total").innerText = totalnum;
-}
+function handleMenuClick(menu) {
+  var numButton = menu.querySelector("#numbutton");
 
 
-var countA=function(button){
-  const numbutton=document.querySelector("#numbutton")
-  const countElement =document.getElementById("result")
-  const currentCount = parseInt(numbutton.dataset.count);
+  if (numButton.style.display === "" || numButton.style.display === "none") {
+    numButton.style.display = "flex";
 
-  if(currentCount>1){
-    numbutton.dataset.count=currentCount-1;
-    totalnum--;
+    menu.style.backgroundColor="#FFF6EA"
   }
-  
-  document.getElementById("total").innerText=totalnum;
-  countElement.innerText=numbutton.dataset.count;
 
+
+  var totalElement = document.getElementById("total");
+  var total = 0;
+  var numButtons = document.querySelectorAll("#numbutton");
+  for (var i = 0; i < numButtons.length; i++) {
+    var count = parseInt(numButtons[i].dataset.count);
+    total += count;
+  }
+  totalElement.textContent = total;
 }
 
-function countB(button){
-  const numbutton=document.querySelector("#numbutton")
-  const countElement =document.getElementById("result")
-  const currentCount = parseInt(numbutton.dataset.count);
-  
-  numbutton.dataset.count=currentCount+1;
-  totalnum++;
-  document.getElementById("total").innerText=totalnum;
- countElement.innerText=numbutton.dataset.count;
- 
-}
+function countA(button) {
+  var numButton = button.parentElement;
+  var countElement = numButton.querySelector("#result");
+  var currentCount = parseInt(numButton.dataset.count);
 
-function resetcount(){
-  count=1;
-  document.getElementById("result").innerText=count;
-  totalnum = 0;
-  document.getElementById("total").innerText = totalnum;
-  
-}
-
-
-var clicked=false;
-
-function resetClicked() {
-  clicked = false;
-
-}
-
-// 색상 변경 및 버튼 클릭 시 보이도록  
- const numbutton=document.querySelector("#numbutton")
-  const menu=document.getElementById("menu");
-
-
-
-function handleClick(e) {
-  if (!clicked) {
-    menu.style.backgroundColor = "#FFF6EA";
-    totalnum++;
-    btnvisible();
-    document.getElementById("total").innerText = totalnum;
-    clicked = true;
+  if (currentCount > 1) {
+    numButton.dataset.count = currentCount - 1;
+    countElement.textContent = numButton.dataset.count;
+    total--;
+    totalElement.textContent = total;
   }
 }
-menu.addEventListener("click", handleClick);
 
-function btnvisible(){
-  numbutton.setAttribute('class','active')
+function countB(button) {
+  var numButton = button.parentElement;
+  var countElement = numButton.querySelector("#result");
+  var currentCount = parseInt(numButton.dataset.count);
+
+  numButton.dataset.count = currentCount + 1;
+  countElement.textContent = numButton.dataset.count;
+  total++;
+  totalElement.textContent = total;
 }
 
-function cancelbtn(){
-  numbutton.removeAttribute('class','active')
-  menu.style.backgroundColor="white";
 
-}
+function resetCounts() {
+  var numButtons = document.querySelectorAll("#numbutton");
+  var menus = document.querySelectorAll("#menu");
 
-function cancel(){
-  totalnums();
-  cancelbtn();
-  resetcount();
+  for (var i = 0; i < numButtons.length; i++) {
+    var numButton = numButtons[i];
+    numButton.dataset.count = 1;
+    numButton.querySelector("#result").textContent = 1;
+    numButton.classList.remove("active");
+    numButton.style.display = "none";
+  }
 
-  document.getElementById("total").innerText=totalnum;
-  resetClicked();
+  for (var i = 0; i < menus.length; i++) {
+    var menu = menus[i];
+    var numButton = menu.querySelector("#numbutton");
+    numButton.classList.remove("active");
+    menu.style.backgroundColor = "white";
+  }
 
+  var totalElement = document.getElementById("total");
+  totalElement.textContent = 0;
 }

@@ -1,46 +1,50 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title>주문 내역 확인</title>
+  <title>SWU Beetle Juice Order System</title>
   <link rel="stylesheet" href="{% static '/css/admin_order.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="back"><a href="http://127.0.0.1:8000/manager/"><img src="{% static '/back.png' %}"></a></div>
-  <div class="header">
-    <h1>주문 내역</h1>
-  </div>
-  <div class="order-list">
-    <form action="#" method="POST">
-      {% csrf_token %}
-      {% for order in orders %}
-        <label for="chk{{ order.id }}">
-          <input type="checkbox" id="chk{{ order.id }}" name="menu" value="{{ order.id }}">
-          <i class="circle"></i>
-          <div id="box">{{ order.cart.swuni }} - {{ order.order_status }}</div>
-          <a href="#pop_info_{{ order.id }}" class="btn_open">+</a>
-        </label>
-      {% endfor %}
-      <button type="submit" name="order_status_cancel" class="btn_cancel">취소</button>
-      <button type="submit" name="order_status_success" class="btn_success">완료</button>
-    </form>
-  </div>
-
-  {% for order in orders %}
-    <div id="pop_info_{{ order.id }}" class="pop_wrap" style="display:none;">
-      <div class="pop_inner">
-        <p class="dsc">메뉴 목록</p>
-        <ul>
-          {% for order_product in order.products.all %}
-            <li>{{ order_product.cart_product.cartProduct.productName }}</li>
-          {% endfor %}
-        </ul>
-        <button type="button" class="btn_close">닫기</button>
-      </div>
+  <div class="container">
+   <div class="header">
+      <div class="back"><a href="http://127.0.0.1:8000/manager/"> <img src="{% static '/back.png' %}"></a></div>
+      <h1>Check Order List</h1>
     </div>
+    <div class="order-list">
+        <form action="#" method="POST">
+          {% csrf_token %}
+          {% for order in orders %}
+          <label for="chk{{ order.id }}">
+            <input type="checkbox" id="chk{{ order.id }}" name="menu" value="{{ order.id }}">
+            <i class="circle"></i>
+            <div id="box">{{ order.cart.swuni }} - {{ order.order_status }}</div>
+            <a href="#popinfo{{ order.id }}" class="btn_open">+</a>
+          </label>
+          {% endfor %}
+        </form>
+  </div>
+  <div class="button-container">
+    <button type="submit" name="order_status_cancel" class="cancle" >취소</button>
+    <button  type="submit" name="order_status_success" class="success">완성</button>
+  </div>
+</div>
+{% for order in orders %}
+  <div id="popinfo{{ order.id }}" class="pop_wrap" style="display:none;">
+    <div class="pop_inner">
+      <p class="dsc">메뉴 목록</p>
+      <ul>
+        {% for order_product in order.products.all %}
+          <li>{{ order_product.cart_product.cartProduct.productName }}</li>
+        {% endfor %}
+      </ul>
+      <button type="button" class="btn_close">닫기</button>
+    </div>
+  </div>
   {% endfor %}
-
   <script src="{% static '/js/admin_order.js' %}"></script>
 </body>
 </html>

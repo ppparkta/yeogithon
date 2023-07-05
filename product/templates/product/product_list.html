@@ -1,67 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>상품 전체 조회</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-  </head>
-  <body>
-  <div class="container">
-    <h1>상품 전체 조회</h1>
-    <p>
-      <a href="{% url 'product:create_product' %}"><i class="bi-plus"></i>등록</a>
-    </p>
+    <head>
+        <link rel="stylesheet" href="{% static '/css/menu.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    </head>
+    <title>Menu</title>
+    <body>
+        <div id="wrap">
+        <div id="header1"><h1>Menu</h1></div>
+        <div id="header2">
+            <h4 id="hotice">
+            <br><br>
+               HOT/ICE</h4>
+        </div>
+        <div id="section" style="overflow-x:hidden; height:790px; width:600px;">
+        <div id="blank"></div>
 
+        <!-- 관리자 권한 있을 때만 보이도록 -->
+        {% if user.is_staff %}
+            <button><a href="http://127.0.0.1:8000/manager/">관리자 페이지</a></button>
+        {% endif %}
 
+        {% for product in products %}
+        <div id="menu">
+           <div id="circle"> <img id="icon" src="{{ product.productImage.url }}"></div>
+          <h3 id="title">{{ product.productName }}<a id="matter">{{ product.productDetail }}</a>
+             <h5 id="listprice">{{ product.productPrice }}</h5></h3>
+           <div id="numbutton" data-count="1">
+            <input type="button" id="minus" onclick='countA(this)' value="-"><div id="result">1</div>
+            <input type="button" id="plus"onclick='countB(this)' value="+">
+        </div>
+            <!-- 관리자 권한 있을 때만 보이도록 -->
+            {% if user.is_staff %}
+              {% csrf_token %}
+                <form method="GET" action="{% url 'product:edit_product' pk=product.pk %}">
+                  <button type="submit" class="btn btn-outline-dark">수정</button>
+                </form>
+                <form method="GET" action="{% url 'product:delete_product' pk=product.pk %}">
+                  <button type="submit" class="btn btn-outline-dark">삭제</button>
+                </form>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <div id="footer">
+            <button type="button" id="footer1" onclick="cancel()">전체 취소</button>
+            <button type="button" id="footer2" onclick="location.href='order.html'">주문페이지 이동&nbsp&nbsp&nbsp&nbsp&nbsp<a id="total">0</a></button>
+        </div>
+        <div id="lastfooter">
+            <button type="button" id="lastfooter1" onclick="location.href='menu.html'">메뉴</button>
+            <button type="button" id="lastfooter2" onclick="location.href='recipe.html'">레시피</button>
+            <button type="button" id="lastfooter3"  onclick="location.href='order2.html'">마이</button>
+        </div>
 
-    <ul class="list-group">
-      {% for product in products %}
-      {% csrf_token %}
-      <div class="col-sm-6">
-                <button><a href="http://127.0.0.1:8000/manager/">관리자 페이지</a></button>
-                <div class="card mb-3">
-                    <div class="embed-responsive embed-responsive-4by3">
-                        <img class="card-img-top embed-responsive-item" src="{{ product.productImage.url }}" width="100" alt="{{ product }}" />
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title h4">{{ product.productName }}</h3>
-                        <h5 class="card-title h4">{{ product.productDetail }}</h5>
-                        <h5 class="card-title h4">{{ product.productPrice }}</h5>
-
-                        {% if product.productTemp == "ICE" %}
-                            <h5>ICE</h5>
-                        {% endif %}
-
-                        {% if product.productTemp == "HOT" %}
-                            <h5>HOT</h5>
-                        {% endif %}
-                    </div>
-                <div class="card-footer">
-                    <div class="small text-muted"></div>
-                </div>
-                    <!-- 관리자 권한 있을 때만 보이도록 -->
-                    {% if user.is_staff %}
-                      {% csrf_token %}
-                        <form method="GET" action="{% url 'product:edit_product' pk=product.pk %}">
-                          <button type="submit" class="btn btn-outline-dark">수정</button>
-                        </form>
-                        <form method="GET" action="{% url 'product:delete_product' pk=product.pk %}">
-                          <button type="submit" class="btn btn-outline-dark">삭제</button>
-                        </form>
-                    {% endif %}
-                </div>
-            </div>
-      {% endfor %}
-    </ul>
-    <h2>장바구니에 상품 추가하기</h2>
-    <form method="POST" action="{% url 'product:product_list' %}">
-        {% csrf_token %}
-        <input type="hidden" name="product_id" value="{{ product.id }}">
-        <!-- 필요한 경우 다른 필드를 추가하세요 -->
-        <button type="submit">장바구니에 추가</button>
-    </form>
-  </div>
-</body>
+    </div>
+    <script src="{% static '/js/menu.js' %}"></script>
+    </div>
+    </body>
 </html>
+</article>

@@ -43,6 +43,7 @@
     width: 50px;
     height: 50px;
     margin-right: 20px;
+    margin-top: 15px;
 }
 
 .btn{
@@ -56,6 +57,7 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     border: none;
+    text-decoration: none;
 }
 
 .btn_txt{
@@ -64,6 +66,8 @@
     font-weight: 700;
     font-size: 28px;
     color:#544866;
+    margin-top: 20px;
+
 }
 
 .btn:hover{

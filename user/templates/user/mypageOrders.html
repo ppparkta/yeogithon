@@ -1,24 +1,52 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>orders</title>
-</head>
-<body>
-    <h1>마이페이지 - 주문목록</h1>
-    <div>
-        {% for order in orders %}
-            {% for order_product in order.products.all %}
-                <p>
-                    {{ order_product.cart_product.cartProduct.productName}} -
-                    {{ order_product.cart_product.cartProductCount }},
-                </p>
-            {% endfor %}
-        <h2>{{ order.cart.swuni.userName }}</h2>
-        <h3>{{ order.order_status }}</h3>
-        <div>{{ order.order_time }}</div>
-        <hr>
-        {% endfor %}
-    </div>
-</body>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/order1.css' %}">
+    </head>
+    <title></title>
+    <body>
+        <div id="wrap">
+            <div id="header1">
+                <button type="button" id="headerA" onclick="location.href='http://127.0.0.1:8000/users/{{request.user.pk}}/orders/'">주문내역</button>
+                <button type="button" id="headerB" onclick="location.href='http://127.0.0.1:8000/users/{{request.user.pk}}/likes/'">찜한목록</button>
+            </div>
+            <div id="header2">
+                    <select name="order" id="orderstate">
+                        <option value="hold"> 주문상태(완료)
+                        <option value="complete" selected> 주문상태(대기)
+                        <option value="cancel"> 주문상태(취소)
+                </select>
+            </div>
+<!--            <div id="header3">-->
+<!--                <h4 id="headerC">2023.05.29~2023.06.29</h4>-->
+<!--            </div>-->
+<!--            <div id="header4">-->
+<!--                <button type="button" id="headerD">기간설정</button>-->
+<!--            </div>-->
+
+            <div id="section" style="overflow-x:hidden; height:790px; width:600px;">
+                {% for order in orders %}
+                <div id="menu1">
+                    <br>
+                    <h1>
+                    {% for order_product in order.products.all %}
+                        {{ order_product.cart_product.cartProduct.productName}}
+                        {{ order_product.cart_product.cartProductCount }}개,
+                    {% endfor %}
+                    </h1>
+                    <h3>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp13,500</h3>
+                    <h4 id="day">{{ order.order_time }} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h4>
+                </div>
+                {% endfor %}
+            </div>
+                <div id="lastfooter">
+                    <button type="button" id="lastfooter1" onclick="location.href='http://127.0.0.1:8000/'">메뉴</button>
+                    <button type="button" id="lastfooter2" onclick="location.href='http://127.0.0.1:8000/post'">레시피</button>
+                    <button type="button" id="lastfooter3" onclick="location.href='http://127.0.0.1:8000/users/{{request.user.pk}}/likes/'">마이</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="{% static 'js/order1.js' %}"></script>
 </html>

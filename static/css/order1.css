@@ -1,0 +1,141 @@
+@font-face {
+    font-family: 'SEBANG_Gothic_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SEBANG_Gothic_Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(215, 208, 184);
+}
+
+#wrap {
+    background-color: white;
+    width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#header1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    padding: 0 20px;
+}
+
+#headerA,
+#headerB {
+    border-color: #E6E6E6;
+    width: 230px;
+    height: 70px;
+    border-radius: 10px;
+    font-size: larger;
+    font-family: 'SEBANG_Gothic_Bold';
+    color: #544866;
+    border: none;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+#header2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#orderstate {
+    background: #E6E6E6;
+    border-radius: 20px;
+    width: 480px;
+    height: 50px;
+    border: none;
+    font-size: 15px;
+    text-align: center;
+    font-family: 'SEBANG_Gothic_Bold';
+    color: #544866;
+}
+
+#header3 {
+    text-align: center;
+    width: 700px;
+    height: 70px;
+    color: #544866;
+}
+
+#header4 {
+    text-align: center;
+    width: 400px;
+    height: 70px;
+}
+
+#headerD {
+    width: 70px;
+    height: 30px;
+    font-size: small;
+    font-family: 'SEBANG_Gothic_Bold';
+    color: #544866;
+    border: none;
+    border-radius: 90px;
+}
+
+#section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 800px;
+    margin-bottom: 20px;
+}
+
+#menu1 {
+    background: #FFF7EA;
+    border-radius: 20px;
+    width: 450px;
+    height: 150px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+#menu1 > h2,
+#menu1 > h3 {
+    color: #4F4F4F;
+    text-align: left;
+}
+
+#menu1 > h4 {
+    color: #4F4F4F;
+    text-align: right;
+    font-weight: lighter;
+    font-size: medium;
+}
+
+#lastfooter {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 100px;
+    background-color: white;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+#lastfooter1,
+#lastfooter2,
+#lastfooter3 {
+    font-size: larger;
+    text-align: center;
+    background-color: white;
+    height: 10px;
+    width: 170px;
+    border: none;
+    font-family: 'SEBANG_Gothic_Bold';
+    margin: 0 5px;
+}

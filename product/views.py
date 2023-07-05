@@ -9,55 +9,39 @@ from cartProduct.models import CartProduct
 def product_list(request):
     if not request.user.is_authenticated:
         return redirect('user:login')
+
+
     products = Product.objects.all().order_by('-pk')
 
     if request.method == 'GET':
         return render(request, 'product/product_list.html', context={'products': products})
 
+    # GET 요청 처리 또는 필요한 경우 폼 렌더링
+    # cartProduct_Form = CartProductForm()
+    return render(request, 'product/product_list.html', {'products': products})
+
+def product_add_cart(request,pk):
+    swuni = request.user
+    cart, created = Cart.objects.get_or_create(swuni=swuni)
+    products = Product.objects.all().order_by('-pk')
+
     if request.method == 'POST':
+        # if 'product' in request.POST:
+        product = get_object_or_404(Product, pk=pk)
+        count = request.POST.get('count')
+        cart_product=CartProduct.objects.create(cart=cart, cartProduct=product, cartProductCount=count)
 
-        swuni = request.user
+        # 총 가격 계산
+        cart_products = cart.products.all()
+        total_price = 0
+        for cart_product in cart_products:
+            total_price += cart_product.cartProductCount * cart_product.cartProduct.productPrice
 
-        if 'product' in request.POST: #cartProduct 보내달라고 fE에게 요청
-            # 카트 상품 폼 제출 처리
-            cart = Cart.objects.get(swuni=swuni)
+        cart.cartTotalPrice = total_price
+        cart.save()
 
-            cartProduct_Form = CartProductForm(request.POST)
-            if cartProduct_Form.is_valid():
-
-                cartProduct = cartProduct_Form.cleaned_data['cartProductCount', 'cartProduct']
-                cartProduct.cart = cart
-                # cart.products=cart_product.cartProduct
-                # cart_product_list =[]
-                # cart_product_list.append(cart.products)
-                # cart.products = cart_product_list
-                cartProduct.save()
-                return render(request, 'product/product_list.html', {'products': products, 'cartProduct': cartProduct})
-
-
-        elif 'product' in request.POST:
-
-            # 총 가격 계산 요청 처리
-
-            cart = Cart.objects.filter(swuni).first()
-            cart_product_list = cart.products.all()
-
-            total_price = 0
-
-            for cart_product in cart_product_list:
-                total_price += cart_product.cartProductCount * cart_product.cartProduct.price
-
-            cart.cartTotalPrice = total_price
-
-            cart.save()
-
-            return render(request, 'cart/cart_list.html', {'cart': cart, 'cart_product_list': cart_product_list})
-
-    # 다른 경우 처리 또는 필요한 경우 폼을 다시 렌더링
-    cartProduct_Form = CartProductForm()
-    cart_form = CartForm()
-    return render(request, 'product/product_list.html', {'products': products, 'cartProduct_Form': cartProduct_Form, 'cart_form': cart_form})
-
+        return render(request, 'product/product_list.html', {'products': products, 'cart_product': cart_product, 'cart': cart})
+        # return redirect('cart:cart_list', {'cart_product': cartProduct, 'cart': cart})
 
 
 # 상품 생성 (권한 필요)

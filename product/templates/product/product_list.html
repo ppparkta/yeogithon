@@ -3,6 +3,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="{% static '/css/menu.css' %}">
+        <link rel="stylesheet" href="menu.css"> <!--프론트 확인용, 지우기!!!-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
@@ -12,51 +13,58 @@
         <div id="wrap">
         <div id="header1"><h1>Menu</h1></div>
         <div id="header2">
-            <h4 id="hotice">
-            <br><br>
-               HOT/ICE</h4>
+            <h4 id="hotice">HOT/ICE</h4>
         </div>
+
+                <!-- 관리자 권한 있을 때만 보이도록 -->
+        {% if user.is_staff %}
+            <button id="manager"><a class="link" href="http://127.0.0.1:8000/manager/">관리자 페이지</a></button>
+        {% endif %}
+
         <div id="section" style="overflow-x:hidden; height:790px; width:600px;">
         <div id="blank"></div>
 
-        <!-- 관리자 권한 있을 때만 보이도록 -->
-        {% if user.is_staff %}
-            <button><a href="http://127.0.0.1:8000/manager/">관리자 페이지</a></button>
-        {% endif %}
-
         {% for product in products %}
-        <div id="menu">
-           <div id="circle"> <img id="icon" src="{{ product.productImage.url }}"></div>
+        <div id="menu" onclick="handleMenuClick(this)">
+           <div id="circle"> <img id="icon" alt="menu image" src="{{ product.productImage.url }}"></div>
           <h3 id="title">{{ product.productName }}<a id="matter">{{ product.productDetail }}</a>
              <h5 id="listprice">{{ product.productPrice }}</h5></h3>
-           <div id="numbutton" data-count="1">
+            <div id="numbutton" data-count="1">
             <input type="button" id="minus" onclick='countA(this)' value="-"><div id="result">1</div>
-            <input type="button" id="plus"onclick='countB(this)' value="+">
-        </div>
+
+            <form method="POST" action="{% url 'product:product_add_cart'  pk=product.pk %}">
+                {% csrf_token %}
+                <input type = "hidden" name="count" value="1">
+                <input type="submit" id="plus"onclick='countB(this)' value="+">
+            </form>
+            </div>
             <!-- 관리자 권한 있을 때만 보이도록 -->
             {% if user.is_staff %}
               {% csrf_token %}
                 <form method="GET" action="{% url 'product:edit_product' pk=product.pk %}">
-                  <button type="submit" class="btn btn-outline-dark">수정</button>
+                  <button type="submit" id="update" class="btn btn-outline-dark">수정</button>
                 </form>
                 <form method="GET" action="{% url 'product:delete_product' pk=product.pk %}">
-                  <button type="submit" class="btn btn-outline-dark">삭제</button>
+                  <button type="submit" id="delete" class="btn btn-outline-dark">삭제</button>
                 </form>
             {% endif %}
         </div>
         {% endfor %}
+
+        </div>
+
         <div id="footer">
-            <button type="button" id="footer1" onclick="cancel()">전체 취소</button>
-            <button type="button" id="footer2" onclick="location.href='order.html'">주문페이지 이동&nbsp&nbsp&nbsp&nbsp&nbsp<a id="total">0</a></button>
+            <button type="button" id="footer1"  onclick="resetCounts()">전체 취소</button>
+            <button type="button" id="footer2" onclick="redirectToCartPage()">주문페이지 이동&nbsp&nbsp&nbsp&nbsp&nbsp<a id="total">0</a></button>
         </div>
         <div id="lastfooter">
-            <button type="button" id="lastfooter1" onclick="location.href='menu.html'">메뉴</button>
-            <button type="button" id="lastfooter2" onclick="location.href='recipe.html'">레시피</button>
-            <button type="button" id="lastfooter3"  onclick="location.href='order2.html'">마이</button>
-        </div>
+            <a href="http://127.0.0.1:8000/" class="link" id="lastfooter1">메뉴</a>
+            <a href="http://127.0.0.1:8000/post/" class="link" id="lastfooter2">레시피</a>
+            <a href="http://127.0.0.1:8000/users/{{ request.user.pk }}/likes/" class="link" id="lastfooter3">마이</a>
 
     </div>
     <script src="{% static '/js/menu.js' %}"></script>
+    <script src="menu.js"></script> <!--프론트 확인용, 지우기!!!-->
     </div>
     </body>
 </html>

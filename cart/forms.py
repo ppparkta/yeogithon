@@ -1,8 +1,10 @@
 from django import forms
 from .models import Cart
 from cartProduct.models import CartProduct
+from product.models import Product
 
 class CartProductForm(forms.ModelForm):
+    cartProduct = forms.ModelChoiceField(queryset=Product.objects.all())
     class Meta:
         model = CartProduct
         fields = ['cartProductCount', 'cartProduct']

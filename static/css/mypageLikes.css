@@ -98,15 +98,13 @@ body{
 }
 
 
-
-
 #lastfooter{
     position: absolute;
-    bottom: 20px;
+    bottom: 0px;
     left: 50%;
     transform: translateX(-50%);
     width:600px;
-    height: 100px;
+    height: 120px;
     grid-area: lastfooter;
     background-color: white;
     display: grid;
@@ -114,7 +112,6 @@ body{
     grid-template-columns: 25px 180px 180px 180px 25px ;
     grid-template-rows: 100px;
     place-items: center;
-
 }
 
 #lastfooter1{

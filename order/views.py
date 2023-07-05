@@ -7,7 +7,7 @@ from orderProduct.models import OrderProduct
 
 
 def view_all_order(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         return redirect('user:login')
     if request.method == 'POST':
         if 'order_status_cancel' in request.POST:

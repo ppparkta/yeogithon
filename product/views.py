@@ -7,8 +7,6 @@ from cartProduct.models import CartProduct
 
 # 상품 전체 조회 (권한 제한 X)
 def product_list(request):
-    if not request.user.is_authenticated:
-        return redirect('user:login')
     products = Product.objects.all().order_by('-pk')
 
     if request.method == 'GET':
@@ -64,7 +62,7 @@ def product_list(request):
 def create_product(request):
     swuni = request.user  # 현재 로그인한 사용자 정보 가져오기
 
-    if not swuni.is_authenticated:  # 권한이 없다면
+    if not swuni.is_staff:  # 권한이 없다면
         return redirect('user:login')  # 로그인 페이지 이동
 
     if request.method == "POST":
@@ -91,7 +89,7 @@ def create_product(request):
 def edit_product(request, pk):
     swuni = request.user  # 현재 로그인한 사용자 정보 가져오기
 
-    if not swuni.is_authenticated:  # 권한이 없다면
+    if not swuni.is_staff:  # 권한이 없다면
         return redirect('user:login')  # 로그인 페이지 이동
     product = get_object_or_404(Product, pk=pk)
 
@@ -125,7 +123,7 @@ def edit_product(request, pk):
 def delete_product(request, pk):
     swuni = request.user  # 현재 로그인한 사용자 정보 가져오기
 
-    if not swuni.is_authenticated:  # 권한이 없다면
+    if not swuni.is_staff:  # 권한이 없다면
         return redirect('user:login')  # 로그인 페이지 이동
     if request.method == "GET":
         product = Product.objects.get(id=pk)

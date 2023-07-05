@@ -25,6 +25,7 @@ def post_detail_view(request, id): # 세부 글 조회
 def post_create_view(request): # 글 생성
     if not request.user.is_authenticated:
         return redirect('user:login')
+
     if request.method == 'GET':
         return render(request, 'post/post_form.html')
     else:

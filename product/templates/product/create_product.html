@@ -2,13 +2,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>상품 등록</title>
+        <title>SWU Beetle Juice Order System</title>
         <link rel="stylesheet" href="{% static '/css/create_product.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class="back"><a href="http://127.0.0.1:8000/manager/"><img src="back.png"></a></div>
+        <div class="container">
+        <div class="back"><a href="http://127.0.0.1:8000/manager/"><img src="{% static '/back.png' %}"></a></div>
         <div>
-            <h1>상품 등록</h1>
+            <h1>Product registration</h1>
         </div>
         <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -28,7 +32,7 @@
 
             <h2 style="margin-bottom: 20px; margin-top: 20px;"> 상품 이미지</h2>
 
-            <div class="box">
+            <div class="box2">
               <div class="button">
                   <label for="chooseFile">
                       <p>👉CLICK HERE👈</p>
@@ -52,7 +56,8 @@
             </div>
           </div>
           <button type="submit" class="btn btn-primary">등록</button>
-        </form>
+        </form></div>
+
         <script src="{% static '/js/create_product.js' %}"></script>
     </body>
 </html>
